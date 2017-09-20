@@ -1,0 +1,46 @@
+<html>
+<head>
+	<title>Login</title>
+	<script src="../../static/js/login.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/login.css" />
+</head>
+<body>
+	<div class="login-container">
+		<div class="login-container-header">
+			<h2>Login</h2>
+		</div>
+		<div class="login-form">
+			<form >
+				<div class="login-form-element">
+					<p>
+						<div class="label">
+							<label>User Name: </label>
+						</div>
+						<div class="form-element">
+							<p>
+								<input id="user_name" name="user_name" required=""> 
+								<div id="alert_user_name"></div>
+							</p>
+						</div>
+					</p>
+					<p>
+						<div class="label">
+							<label>Password: </label>
+						</div>
+						<div class="form-element">
+							<p>
+								<input id="password" name="passwrd" required="">
+								<div id="alert_password"></div>
+							</p>
+
+						</div>
+					</p>
+					<div class="form-submit">
+						<button type="button" OnClick="attemptLogin()">Login</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
