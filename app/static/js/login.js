@@ -1,40 +1,34 @@
 /*
 This function attempts a login by making an ajax call to local php script
 */
-function attemptLogin(){
-	//resetting the form
-	resetForm();
 
-	var user_name = document.getElementById('user_name');
-	var password = document.getElementById('password');
+document.querySelector("#form_login").addEventListener("submit", function(e){
+	e.preventDefault(); 
+	userLogin() 
+});
 
-	//validating fields
-	if (user_name.value == ""){
-		user_name.style.borderColor = "red";
-		document.getElementById("alert_user_name").innerHTML='<div style="color: organge;"><p>Missing User Name</p></div>'
-	}
+document.querySelector("#user").addEventListener("invalid", function(){
+	if(String(this.value).length==0)
+		this.setCustomValidity("Missing username...");
 	else{
-		user_name.style.borderColor = "green";
+		this.setCustomValidity("");
 	}
-	if (password.value == ""){
-		password.style.borderColor = "red";
-		document.getElementById("alert_password").innerHTML= '<div style="color: organge;"><p>Missing Password</p></div>'
-	}
+});
+
+document.querySelector("#pass").addEventListener("invalid", function(e){
+	if(String(this.value).length==0)
+		this.setCustomValidity("Missing password...");
 	else{
-		password.style.borderColor = "green";
+		this.setCustomValidity("");
 	}
+});
+
+
+function userLogin(){
+	var user_name = document.getElementById('user');
+	var password = document.getElementById('pass');
 
 	makeAjaxCall(user_name.value, password.value);
-
-}
-/*
-This function resets the form to its normal state
-*/
-function resetForm(){
-	document.getElementById('user_name').style.borderColor = '';
-	document.getElementById('password').style.borderColor = '';
-	document.getElementById("alert_user_name").innerHTML = '';
-	document.getElementById("alert_password").innerHTML = '';
 }
 
 /*
@@ -52,20 +46,124 @@ function makeAjaxCall(user_name, password){
 	//ajax request successful
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-		    var resp = request.responseText;
-		    console.log("Response: "+resp);
+			var resp = request.responseText;
+			loginAjaxHandler(resp)
 		} else {
-			console.log("Something failed")
+			var error = {"error":"Something Failed"}
+			loginAjaxHandler(error)
 		}
 	};
 
 	//ajax request failed
 	request.onerror = function() {
-	    console.log("Something went wrong")
+		console.log("Something went wrong")
 	};
 
 	request.send(data);
 
 }
+
+function loginAjaxHandler(response){
+	var message = ""
+	var parsed_resposne = JSON.parse(response)
+	if ('error' in parsed_resposne){
+		message = parsed_resposne['error']
+		console.log(parsed_resposne)
+	}
+	else{
+		var njit_response = parsed_resposne['njitLoginSuccess'];
+		var db_response = parsed_resposne['dbLoginSuccess'];
+		var color = "#01BC9F"
+		var check_mark = '<div style="font-size: 200%; width: 50px; float: left;">&#x2713;&nbsp;</div>'
+		var error_mark = '<div style="font-size: 300%; width: 50px; float: left; margin-top:10px">&#xd7;&nbsp;</div>'
+		if (njit_response)
+			message = check_mark+'<div style="font-size: 80%; width: 250px; float: left;">Welcome to your NJIT account!</div>'
+		else if(db_response)
+			message = check_mark+'<div style="font-size: 80%; width: 250px; float: left;">Welcome to our system!</div>'
+		else{
+			message = error_mark+'<div style="font-size: 80%; width: 250px; float: left;">User and password not found, please try again.</div>'
+			color = "#F45F63"
+		}
+		console.log("NJIT Response: "+njit_response)
+		console.log("DB Response: "+db_response)
+	}
+	flash(message, color);
+	
+}
+
+function flash(message, color) {
+    var login_body = document.getElementById("login")
+    var flash = document.getElementById("flash")
+    
+    if(flash){
+    	login_body.removeChild(flash);
+    }
+    var new_flash =  document.createElement("div");
+    new_flash.setAttribute("id", "flash");
+    new_flash.innerHTML = message    
+
+    //applying css dynamically
+    new_flash.style.position = "fixed"
+    new_flash.style.top = "60px"
+	new_flash.style.zIndex =  '1';
+	new_flash.style.textAlign = "left"
+	new_flash.style.margin  = "auto"
+	new_flash.style.color = "#fff"
+	new_flash.style.fontSize = "19px"
+	new_flash.style.width = "324px"
+	new_flash.style.padding = "20px"
+	new_flash.style.MozBorderRadius = "5px"
+	new_flash.style.WebkitBorderRadius = "5px"
+	new_flash.style.borderRadius = "5px"
+	new_flash.style.backgroundColor = color
+	new_flash.style.fontFamily = "'Open Sans', Arial, sans-serif;"
+    login_body.prepend(new_flash)
+    
+    setTimeout(function(){
+    	fade(new_flash);
+    }, 4000);
+      
+}
+
+
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 30);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

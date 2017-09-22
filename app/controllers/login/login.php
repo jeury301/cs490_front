@@ -1,10 +1,13 @@
 <?php
-//Author: Jeury Mejia
-//Date: 09/16/2017
-//Purpose: This php makes a curl request to the middle-man to authenticate the user
-
+/*
+Author: Jeury Mejia
+Date: 09/16/2017
+Purpose: This php makes a curl request to the login_middle.php to authenticate the user
+to both NJIT and our own database. 
+*/
 //this code was reproduced using POSTMAN
 $curl = curl_init();
+
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://web.njit.edu/~mga25/cs_490/app/login/login_middle.php",
@@ -28,7 +31,7 @@ $err = curl_error($curl);
 curl_close($curl);
 
 if ($err) {
-  echo "cURL Error #:" . $err;
+  echo "CURL Error #:" . $err;
 } else {
   echo $response;
 }
