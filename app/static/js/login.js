@@ -1,4 +1,5 @@
 /*
+Author: Jeury Mejia
 This function attempts a login by making an ajax call to local php script
 */
 
