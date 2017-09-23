@@ -1,24 +1,27 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 09/23/17
+**Purpose: This file contains the login UI of this app. It contains a simple form with two fields:
+Usernam, Password. Through javascript, it displays flash messages to indicate login success or failure.
+-->
 <!DOCTYPE html>
 <html >
 <head>
 	<meta charset="UTF-8">
 	<title>Login</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/login.css" />
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
-
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
 <body id="body">
+	<!-- Small login form -->
 	<div id="login">
 		<form name='form-login' id="form_login" >
 			<input type="text" id="user" placeholder="Username" required="Missing username.">
-
 			<input type="password" id="pass" placeholder="Password" required="Missing password.">
-
 			<input type="submit" value="Login">
-
 		</form>
 	</div>
 </body>
-	<script type="text/javascript" src="../../static/js/login.js"></script>
+<script type="text/javascript" src="../../static/js/login.js"></script>
 </html>

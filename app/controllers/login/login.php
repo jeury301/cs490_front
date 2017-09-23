@@ -1,14 +1,15 @@
 <?php
 /*
-Author: Jeury Mejia
-Date: 09/16/2017
-Purpose: This php makes a curl request to the login_middle.php to authenticate the user
-to both NJIT and our own database. 
+**Author: Jeury Mejia
+**Last Upated: 09/23/2017
+**Purpose: This php makes a curl request to the middle (login_middle.php) to authenticate the user
+to both NJIT and our own database. It is accessed through an ajax call from login.js.
 */
-//this code was reproduced using POSTMAN
+
+//initializing curl object
 $curl = curl_init();
 
-
+//creaing curl object.
 curl_setopt_array($curl, array(
   CURLOPT_URL => "https://web.njit.edu/~mga25/cs_490/app/login/login_middle.php",
   CURLOPT_RETURNTRANSFER => true,
@@ -25,15 +26,16 @@ curl_setopt_array($curl, array(
   ),
 ));
 
+//executing curl call.
 $response = curl_exec($curl);
 $err = curl_error($curl);
 
 curl_close($curl);
 
+//checking for errors and echoing back response to caller. 
 if ($err) {
   echo "CURL Error #:" . $err;
 } else {
   echo $response;
 }
-
 ?>
