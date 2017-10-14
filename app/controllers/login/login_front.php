@@ -11,7 +11,7 @@ $curl = curl_init();
 
 //creaing curl object.
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://web.njit.edu/~mga25/cs_490/app/login/login_middle.php",
+  CURLOPT_URL => "https://web.njit.edu/~mga25/cs_490/app/controllers/login/login_middle.php",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,

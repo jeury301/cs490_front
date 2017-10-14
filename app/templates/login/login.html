@@ -17,9 +17,13 @@ Usernam, Password. Through javascript, it displays flash messages to indicate lo
 	<!-- Small login form -->
 	<div id="login">
 		<form name='form-login' id="form_login" >
-			<input type="text" id="user" placeholder="Username" required="Missing username.">
-			<input type="password" id="pass" placeholder="Password" required="Missing password.">
-			<input type="submit" value="Login">
+			<input class="clean" type="text" id="user" placeholder="Username" required="Missing username.">
+			<input class="clean" type="password" id="pass" placeholder="Password" required="Missing password.">
+			<div class="regular">
+				<input type="radio" name="role" id="student" value="student" checked>Student
+				<input type="radio" name="role" id="professor" value="professor">Professor
+			</div>
+			<input class="clean" type="submit" value="Login">
 		</form>
 	</div>
 </body>

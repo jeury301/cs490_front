@@ -1,0 +1,46 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 10/14/17
+**Purpose: This file contains the main professor page.
+-->
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Question Bank - Professor</title>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+</head>
+
+<body class="container">
+	<div id="header">
+		<div class="left" id="njit_logo">
+			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" height="25%" width="25%">
+		</div>
+		<div class="centered" id="app_title">
+			Moodle Replacement
+		</div>
+		<div class="right" id="dropdown">
+			<ul>
+				<li>
+					<a id="professor_id">Professor ID</a>
+					<ul class="dropdown">
+					  <li><a href="javascript:logOut()">Log out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<a href="../main/professor_main.html">Main</a>
+		<a href="../exams/professor_exams.html" >Exams</a>
+		<a href="../question_bank/question_bank.html" class="active">Question Bank</a>
+	</div>
+	<div id="body"></div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../static/js/logout.js"></script>
+</html>

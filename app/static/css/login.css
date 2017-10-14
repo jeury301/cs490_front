@@ -12,7 +12,14 @@ input {
   font-size: 16px;
   line-height: 1.5em;
   padding: 0;
-  -webkit-appearance: none;
+  .clean{
+   -webkit-appearance: none;
+ }
+}
+
+.regular {
+  padding-bottom: 10px;
+  text-align: center;
 }
 
 p {
@@ -81,12 +88,12 @@ after { clear: both; }
 }
 #login form input[type="submit"]:hover {
   background: #66c3ff;
-;
+  ;
 }
 
 #login form input[type="submit"]:click {
   background: #66c3ff;
-;
+  ;
 }
 
 

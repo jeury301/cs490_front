@@ -65,8 +65,10 @@ makeAjaxCall(username, password).
 function userLogin(){
 	var user_name = document.getElementById('user');
 	var password = document.getElementById('pass');
-
-	makeAjaxCall(user_name.value, password.value);
+	var role = document.getElementById('professor').checked? "professor" : "student";
+	
+	console.log("role: "+role)
+	makeAjaxCall(user_name.value, password.value, role);
 }
 
 
@@ -75,15 +77,15 @@ The following function is called by userLogin(), and it recieves the username an
 It firsts creates a formatted string to make an ajax call to the back of the front (login.php). After the ajax call 
 is completed, loginAjaxHandler(message) is called to hanlde the response recieved.
 */
-function makeAjaxCall(user_name, password){
+function makeAjaxCall(user_name, password, role){
 	
 	//building string to send through an ajax call to the back of the front (login.php) in the format required for 'x-www-form-urlencoded'
-	var data = 'json_string={"username":"'+user_name+'","plaintext_password":"'+password+'"}'
+	var data = 'json_string={"action":"login","username":"'+user_name+'","plaintext_password":"'+password+'","role":"'+role+'"}'
 
 	//creating an ajax request object.
 	var request = new XMLHttpRequest();
 	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
-	request.open('POST', '../../controllers/login/login.php', true);
+	request.open('POST', '../../controllers/login/login_front.php', true);
 	//setting up the content type in the header to 'x-wwww-form-urlencoded'
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 	//making ajax request.
@@ -93,10 +95,14 @@ function makeAjaxCall(user_name, password){
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
 			var resp = request.responseText;
+
+			console.log(resp)
 			//calling login ajax handler function
 			loginAjaxHandler(resp)
 		} else {
-			var error = {"error":"Something Failed"}
+			var resp = request.responseText;
+			console.log("Something major happened!")
+			console.log(JSON.stringify(resp))
 			//calling login ajax handler function
 			loginAjaxHandler(error)
 		}
@@ -111,6 +117,27 @@ function makeAjaxCall(user_name, password){
 }
 
 
+
+function loginAjaxHandler(response){
+	var parsed_resposne = JSON.parse(response)
+	console.log(parsed_resposne)
+	if('error' in parsed_resposne){
+		user_message = parsed_resposne['user_message']
+		internal_message = parsed_resposne['internal_message']
+		
+	}
+	else{
+		if(parsed_resposne['role']=="student")
+			window.location.replace("../main/student_main.html");
+		else{
+			window.location.replace("../main/professor_main.html");
+		}
+	}
+}
+
+
+
+
 /*
 The following function is called by makeAjaxCall(), and it recieves the response from the login ajax call. This function first
 parses the response, looking for three key values: 'error', 'njitLoginSuccess', 'dbLoginSuccess'. If the 'error' key is found, 
@@ -118,7 +145,7 @@ an error is displayed as a flash message and printed to console. If no error is 
 are parsed, and based on their truth values, one of three messages are diplayed as a flash notification. The messages cover 
 the following cases: successful access to our dabatase, successfull access to njit website or uncessful access.
 */
-function loginAjaxHandler(response){
+function loginAjaxHandlerAlpha(response){
 	
 	var message = ""
 	//parsing string response to a json object.
