@@ -279,6 +279,7 @@ function msieversion()
         return true
     }
     return false;
+    
 }
 
 
