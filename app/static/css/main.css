@@ -19,10 +19,17 @@ body {
 	
 }
 
+
 #njit_logo {
 	display:inline-block;
 	margin-right:50%; 
 } 
+
+#njit_logo img {
+  width: 169px;
+  height: 66px;
+}
+
 #app_title {
 	text-align: center;
 } 
@@ -80,11 +87,71 @@ body {
 	color: #606468;
 }
 
+input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 0;
+  .clean{
+   -webkit-appearance: none;
+ }
+}
+
+
+#create input {
+  background: #4788b2;
+  margin-top: 10px;
+  border: 0;
+  width: 130px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#edit input {
+  background:#5cb85c;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#delete input {
+  background:#d9534f;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#questions input:hover {
+  background: #66c3ff;
+  ;
+}
+
+#questions input:click {
+  background: #66c3ff;
+  ;
+}
+
+
 #dropdown{
 
    position:fixed;
    right:10px;
    top:0px;
+   margin-right: 10px;
 }
 
 ul{
@@ -92,19 +159,29 @@ ul{
     list-style: none;
     background: white;
     color:#606468;
+    text-align: center;
+
 }
+
+.text-center {
+  text-align: center;
+}
+
 ul li{
     display: inline-block;
     position: relative;
     line-height: 21px;
     text-align: left;
     font-size: 15px;
+    text-align: center;
 }
 ul li a{
     display: block;
-    padding: 2px 5px;
+    padding: 5px 5px;
     color: #606468;
     text-decoration: none;
+    min-width: 60px;
+
 }
 ul li a:hover{
     color: #fff;

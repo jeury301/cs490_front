@@ -38,52 +38,29 @@
 		<a href="../question_bank/question_bank.html" class="active">Question Bank</a>
 	</div>
 	<div id="body">
-		<div id="questions">
-			<div id="create">
-				<input class="clean" type="button" value="Create Question" onclick="goTo('create_question.html')">
+		<form>
+			<div class="form-group">
+				<label for="exampleInputEmail1">Email address</label>
+				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 			</div>
-			<p>
-				The following is a list of questions that have been added to the question bank...
-			</p>
-			<table style="width:100%">
-				<tr>
-					<th>Question Name</th>
-					<th>Edit</th> 
-					<th>Delete</th>
-				</tr>
-				<tr>
-					<td>Question 1</td>
-					<td class="text-center">
-						<div id="edit">
-							<input class="clean success" type="button" value="Edit">
-						</div>
-					</td> 
-					<td class="text-center">
-						<div id="delete">
-							<input class="clean" type="button" value="Delete">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>Question 2</td>
-					<td class="text-center">
-						<div id="edit">
-							<input class="clean success" type="button" value="Edit">
-						</div>
-					</td> 
-					<td class="text-center">
-						<div id="delete">
-							<input class="clean" type="button" value="Delete">
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-
+			<div class="form-group">
+				<label for="">Password</label>
+				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+					<input type="checkbox" class="form-check-input">
+					Check me out
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 	</div>
-	<div id="footer">
-		Copyright &copy; CS490
-	</div>
+</div>
+<div id="footer">
+	Copyright &copy; CS490
+</div>
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/logout.js"></script>
