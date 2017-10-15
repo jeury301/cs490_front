@@ -135,7 +135,7 @@ function loginAjaxHandler(response){
 		window.localStorage.setItem('role', parsed_resposne['role'])
 		if(parsed_resposne['role']=="student"){
 			console.log("Student")
-			//window.location.replace("../main/student_main.html");
+			window.location.replace("../main/student_main.html");
 		}
 		else{
 			console.log("Professor")
