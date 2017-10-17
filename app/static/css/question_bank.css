@@ -4,9 +4,28 @@ table, th, td {
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 16px;
 	line-height: 1.5em;
+	padding: 5px;
+
 }
 
 td {
 	padding: 5px;
 
+}
+
+#body{
+	padding: 20px;
+	border-color: black;
+	border-width: 2px;
+	
+}
+
+#questions{
+	padding: 20px;
+	background:#384751;
+  	color: white;
+	/*background-color: #2c3338;*/
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px; 
 }

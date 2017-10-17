@@ -10,10 +10,10 @@ window.onload=function(){
 	var user_id = window.localStorage.getItem('user_id');
 	if(user_id == null)
 		window.location.replace("../login/login.html");
-	document.getElementById("professor_id").innerHTML = user_id
 	console.log(user_id)
 	var role = window.localStorage.getItem('role');
-	document.getElementById("app_title").innerHTML = "Moodle Replacement - "+jsUcfirst(role)
+	document.getElementById("app_title").innerHTML = "Moodle Replacement"
+	document.getElementById("professor_id").innerHTML = jsUcfirst(role)+": "+user_id
 	console.log(role)
 }; 
 
