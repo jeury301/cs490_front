@@ -12,7 +12,6 @@ window.onload=function(){
 		window.location.replace("../login/login.html");
 	console.log(user_id)
 	var role = window.localStorage.getItem('role');
-	document.getElementById("app_title").innerHTML = "Moodle Replacement"
 	document.getElementById("professor_id").innerHTML = jsUcfirst(role)+": "+user_id
 	console.log(role)
 }; 

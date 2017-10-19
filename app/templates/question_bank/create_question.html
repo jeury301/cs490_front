@@ -15,47 +15,141 @@
 
 <body class="container">
 	<div id="header">
-		<div class="left" id="njit_logo">
-			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
-		</div>
-		<div class="centered" id="app_title">
-			Moodle Replacement
-		</div>
-		<div class="right" id="dropdown">
-			<ul>
-				<li>
-					<a id="professor_id">Professor ID</a>
-					<ul class="dropdown">
-						<li><a href="javascript:logOut()">Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+		<span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
+
+			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px">
+				<ul>
+					<li>
+						<a id="professor_id">Professor ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/professor_main.html">Main</a>
-		<a href="../exams/professor_exams.html" >Exams</a>
+		<a href="../exams/professor_exams.html">Exams</a>
 		<a href="../question_bank/question_bank.html" class="active">Question Bank</a>
 	</div>
 	<div id="body">
-		<form>
-			<div class="form-group">
-				<label for="exampleInputEmail1">Email address</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-				<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-			</div>
-			<div class="form-group">
-				<label for="">Password</label>
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-			</div>
-			<div class="form-check">
-				<label class="form-check-label">
-					<input type="checkbox" class="form-check-input">
-					Check me out
-				</label>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+		<div id="questions">
+			
+			<div id="create-question">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Create New Question
+				</div>
+				<!-- Small login form -->
+				<form name='form-create-question' id="form_create_question" >
+					<div class="question-block">
+						<div class="left-block">
+							<label>Question: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="question_name" placeholder="Enter question..." required="Missing question">
+						</div>
+					</div>
+					<div class="question-block">
+						<div class="left-block">
+							<label>Function Name: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="function_name" placeholder="Enter function name..." required="Missing function name." style="width: 60%">
+						</div>
+					</div>
+					<div class="question-block">
+						<div class="left-block">
+							<label>Function Params: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="function_name" placeholder="Enter function parameters..." required="Missing function name." style="width: 60%">
+						</div>
+					</div>
+					<div class="question-block" style="margin-bottom: 10px;">
+						<div class="super-block">
+							<div class="left-block">
+								<label>Test Cases:</label>
+							</div>
+							<div class="right-block">
+								<div class="two-quarter" style="width: 40%">
+									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="two-quarter" style="width: 40%;">
+									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="quarter" style="width: 10%; float: right;" >
+									<input class="clean" type="submit" value="Add" style="width:100%">
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							<div class="left-block">
+								<label>&nbsp;</label>
+							</div>
+							<div class="right-block">
+								<div class="two-quarter" style="width: 40%">
+									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="two-quarter" style="width: 40%;">
+									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="quarter" style="width: 10%; float: right;" >
+									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							<div class="left-block">
+								<label>&nbsp;</label>
+							</div>
+							<div class="right-block">
+								<div class="two-quarter" style="width: 40%">
+									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="two-quarter" style="width: 40%;">
+									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="quarter" style="width: 10%; float: right;" >
+									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							<div class="left-block">
+								<label>&nbsp;</label>
+							</div>
+							<div class="right-block">
+								<div class="two-quarter" style="width: 40%">
+									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="two-quarter" style="width: 40%;">
+									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="quarter" style="width: 10%; float: right;" >
+									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</br>
+				<div>
+					<input class="clean" type="submit" value="Create">
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 <div id="footer">
@@ -63,5 +157,38 @@
 </div>
 </div>
 </body>
-<script type="text/javascript" src="../../static/js/logout.js"></script>
+<script type="text/javascript">
+	
+	if(scrollBars()){
+		document.getElementById("footer").style.position = "relative";
+		document.getElementById("dropdown").style.position = "relative";
+	}
+	else{
+		document.getElementById("footer").style.position = "fixed";
+		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
+	}
+
+	function scrollBars(){
+		var body= document.getElementsByTagName("BODY")[0];
+		console.log(body.scrollHeight)
+		console.log(body.clientHeight)
+		return body.scrollHeight>body.clientHeight;	
+	}
+
+	function loadGeneral(){
+		var user_id = window.localStorage.getItem('user_id');
+		if(user_id == null)
+			window.location.replace("../login/login.html");
+
+		var role = window.localStorage.getItem('role');
+		document.getElementById("professor_id").innerHTML = jsUcfirst(role)+": "+user_id
+	}
+
+	function jsUcfirst(string) 
+	{
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+	loadGeneral();
+</script>
 </html>

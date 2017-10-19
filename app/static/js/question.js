@@ -6,6 +6,7 @@
 
 window.onload=function(){
 	console.log("Hello world")
+	//var fields = {"primary_key":5}
 	var fields = {}
 	loadGeneral();
 	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
@@ -52,6 +53,7 @@ function questionList(response){
 	else{
 		document.getElementById("footer").style.position = "fixed";
 		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
 	}
 
 	
@@ -148,4 +150,9 @@ function scrollBars(){
 	return body.scrollHeight>body.clientHeight;	
 }
 
+
+
+function goTo(page){
+	window.location.replace(page);
+}
 

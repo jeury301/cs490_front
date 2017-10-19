@@ -16,27 +16,26 @@
 <body class="container">
 	<div id="header">
 		<span>
-		<div class="left" id="njit_logo">
-			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
-		</div>
-		<div class="centered" id="app_title">
-			<h4>Moodle Replacement</h4>
-		</div>
-		<div class="right" id="dropdown" style="margin-top: -159px;">
-			<ul>
-				<li>
-					<a id="professor_id">Professor ID</a>
-					<ul class="dropdown">
-						<li><a href="javascript:logOut()">Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
+
+			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px;">
+				<ul>
+					<li>
+						<a id="professor_id">Professor ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/professor_main.html">Main</a>
-		<a href="../exams/professor_exams.html" >Exams</a>
+		<a href="../exams/professor_exams.html">Exams</a>
 		<a href="../question_bank/question_bank.html" class="active">Question Bank</a>
 	</div>
 	<div id="body">
@@ -48,6 +47,10 @@
 				The following is a list of questions that have been added to the question bank...
 			</p>
 			<table style="width:100%" id="question_table">
+				<col width="10%">
+				<col width="60%">
+				<col width="15%">
+				<col width="15%">
 				<tr>
 					<th>Question ID</th>
 					<th>Question Text</th>

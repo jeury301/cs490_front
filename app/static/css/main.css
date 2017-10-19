@@ -1,3 +1,4 @@
+
 html,
 body {
 	font: 87.5%/1.5em 'Open Sans', sans-serif;
@@ -14,7 +15,7 @@ body {
 	color: white;
 	padding: 1em;
 	width:100%;
-	height:60px;
+	height:110px;
 	font-size: 25px;
 	
 }
@@ -73,8 +74,11 @@ html, body {
 .topnav {
 	background: #384751;
 	overflow: hidden;
+  
 
 }
+
+
 
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -120,7 +124,7 @@ input {
   background: #4788b2;
   margin-top: 10px;
   border: 0;
-  width: 130px;
+  width: 150px;
   height: 40px;
   border-radius: 3px;
   color: white;
@@ -170,9 +174,15 @@ input {
    margin-right: 0px;*/
    margin-left:82.5%;
    width:14%;
-   margin-top:-125px;
+   margin-top:-107px;
 }
 
+#title{
+    width: 50%;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
 
 
 ul{
