@@ -195,7 +195,7 @@ after { clear: both; }
 label 
 {
   /* Other styling.. */
-  text-align: right;
+  text-align: left;
   clear: both;
   float:left;
   margin-right:15px;

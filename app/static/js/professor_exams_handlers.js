@@ -37,7 +37,7 @@ function questionList(response){
 		//var edit_td = document.createElement("td");
 		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var add_td = document.createElement("td");
-		add_td.innerHTML = '<div class="text-center"><input class="submit-button clean" type="button" value="Add" onClick="addQuestion('+items[item]['primary_key']+')"></div>'
+		add_td.innerHTML = '<div class="text-center"><input class="submit-button clean" type="button" value="Add" onClick="addQuestion('+items[item]['primary_key']+')" id="question_to_add_'+items[item]['primary_key']+'"></div>'
 
 		tr.appendChild(question_name_td);
 		//tr.appendChild(edit_td);
@@ -59,6 +59,15 @@ function questionList(response){
 	
 	
 }
+
+
+
+function addQuestion(question_id){
+	var question_text = document.getElementById("question_text_"+question_id).innerText
+	document.getElementById("question_to_add_"+question_id).disabled = true;
+	console.log("question: "+question_text)
+}
+
 
 
 

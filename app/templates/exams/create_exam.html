@@ -47,9 +47,38 @@
 				</div>
 				<!-- Small login form -->
 				<form name='form-create-exam' id="form_create_exam" onSubmit="submitExam(event)">
+					<div class="question-block">
+						<div class="left-block">
+							<label>Exam Name: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="test_name" placeholder="Enter exam name..." required="Missing exam name">
+						</div>
+					</div>
+					<div class="question-block">
+						<div class="left-block" style="width: 100%; text-align:center !important; margin-bottom: 20px;">
+							<label>Exam Questions - <small style="color: #a9a9a9;">add new questions from the question bank</small></label>
+						</div>
+					</div>
+					<div class="question-block" id="question_id_0">
+						<div class="left-block">
+							<label><input onClick="deleteQuestion(0)" class="delete-question" type="button" value="delete" style="height: 30px; width: 100%"></label>
+						</div>
+						<div class="right-block other" style="margin-bottom: 30px;">
+							<label style="color:#5bc0de;" id="label_id_0">Q1: What is 2 + 2?</label>
+						</div>
+					</div>
 					
-					<br>
+					<div class="question-block" id="question_id_0">
+						<div class="left-block">
+							<label><input onClick="deleteQuestion(0)" class="delete-question" type="button" value="delete" style="height: 30px; width: 100%"></label>
+						</div>
+						<div class="right-block other" style="margin-bottom: 30px;">
+							<label style="color:#5bc0de;" id="label_id_0">Q1: What is 2 + 2?</label>
+						</div>
+					</div>
 
+					<br>
 					<div >
 						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('professor_exams.html')">
 						<input class="clean" type="submit" value="Create">

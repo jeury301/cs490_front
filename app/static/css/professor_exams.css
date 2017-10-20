@@ -21,6 +21,20 @@ td {
 
 }
 
+
+label 
+{
+  /* Other styling.. */
+  text-align: left;
+  clear: both;
+  float:left;
+  margin-right:15px;
+  font-size: 16px;
+  color: white;
+  font-size: 16px;
+}
+
+
 #body{
 	padding: 20px;
 	border-color: black;
@@ -126,6 +140,7 @@ td {
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
+
 #create-exam form input[type="button"]:hover {
   background: #66c3ff;
   ;
@@ -136,6 +151,42 @@ td {
   ;
 }
 
+.left-block {
+  width: 20%;
+  float: left;
+}
+.right-block {
+  width: 80%;
+  float: left;
+
+}
+
+.quarter {
+  width: 25%;
+  float: left;
+}
+
+.two-quarter {
+  width: 50%;
+  float: left;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  right: 30px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 .submit-button {
  background-color:   #4788b2 !important;
@@ -144,4 +195,26 @@ td {
  margin-bottom: 1em;
  padding: 0 16px;
  height: 30px;
+}
+
+.delete-question {
+    background-color: #d9534f !important;
+ border-radius: 3px;
+ color: white;
+  padding: 0 16px;
+   height: 25px;
+
+  margin-bottom: none;
+}
+
+
+button {
+ background-color: #d9534f !important;
+ border-radius: 3px;
+ color: white;
+  padding: 0 16px;
+   height: 25px;
+
+  margin-bottom: none;
+
 }
