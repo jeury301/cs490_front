@@ -26,6 +26,9 @@ td {
 	border-color: black;
 	border-width: 2px;
 	
+  margin-bottom: 60px;
+  padding-bottom:60px;   /* Height of the footer */
+
 }
 
 #exams{
