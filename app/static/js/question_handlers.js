@@ -1,3 +1,27 @@
+window.onload=function(){
+	//var fields = {"primary_key":5}
+	var question = window.localStorage.getItem("question_to_delete")
+	console.log("Question to delete: "+question)
+	if(question){
+		var question = JSON.parse(question)['question_text'];
+		document.getElementById("question_to_remove").innerHTML = "Q: "+question
+	}
+}; 
+
+
+function fullyDeleteQuesiton(){
+	var question = window.localStorage.getItem("question_to_delete")
+	var primary_key =  JSON.parse(question)['primary_key'];
+	console.log(primary_key)
+
+	ajaxCallToDelete("delete", primary_key)
+
+
+}
+
+
+
+
 var testCasesKeeper = 0
 
 //This function create a new node for the test case
@@ -158,6 +182,72 @@ function ajaxCallInsertQuestion(action, fields){
 	};
 	
 }
+
+
+
+
+
+function ajaxCallToDelete(action, primary_key){
+	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	var data = 'json_string={"action":"'+action+'", "primary_key":"'+primary_key+'", "fields":{}}'
+	console.log(data)
+	var request = new XMLHttpRequest();
+	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
+	request.open('POST', '../../controllers/question/question_front.php', true);
+	//setting up the content type in the header to 'x-wwww-form-urlencoded'
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	//making ajax request.
+	request.send(data);
+
+	//ajax request was successful
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			try {
+				console.log(request.responseText)
+				var resp = JSON.parse(request.responseText);
+				//console.log(resp['status'])
+				if(resp['status']=="success")
+					goTo('question_bank.html')
+				else{
+					console.log("Internal error: "+request.responseText)
+					flash(request.responseText, "#F45F63")
+					enableScroll();
+					loader.classList.remove("loader");
+
+			}
+			//console.log(JSON.stringify(response))
+			//console.log(resp)
+			} catch (e) {
+				flash(request.responseText, "#F45F63")
+				enableScroll();
+				loader.classList.remove("loader");
+
+			}
+
+	} else {
+		var resp = request.responseText;
+		console.log("Something major happened!")
+		flash(resp, "#F45F63")
+		enableScroll();
+		loader.classList.remove("loader");
+
+		//console.log(JSON.stringify(resp))
+
+	}
+};
+
+	//ajax request failed
+	request.onerror = function() {
+		console.log("Something went wrong")
+		flash("Something went wrong", "#F45F63")
+		enableScroll();
+	};
+	
+}
+
+
+
+
 
 
 /*

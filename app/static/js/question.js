@@ -81,13 +81,15 @@ function questionList(response){
 		question_id_td.appendChild(question_id);
 
 		var question_name_td = document.createElement("td");
+		question_name_td.id = "question_text_"+items[item]['primary_key']
 		var question_name = document.createTextNode(items[item]['question_text']);
+		
 		question_name_td.appendChild(question_name);
 
 		//var edit_td = document.createElement("td");
 		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var delete_td = document.createElement("td");
-		delete_td.innerHTML = '<div class="delete text-center"><input class="clean" type="button" value="Delete"></div>'
+		delete_td.innerHTML = '<div class="delete text-center"><input class="clean" type="button" value="Delete" onClick="deleteQuestion('+items[item]['primary_key']+')"></div>'
 
 		tr.appendChild(question_id_td);
 		tr.appendChild(question_name_td);
@@ -110,6 +112,17 @@ function questionList(response){
 	
 	
 }
+
+
+function deleteQuestion(primary_key){
+	console.log("question_item: "+primary_key)
+	var question_text = String(document.getElementById("question_text_"+primary_key).textContent)
+	console.log("question_text: "+question_text)
+	var question = {"primary_key":primary_key, "question_text":question_text}
+	window.localStorage.setItem("question_to_delete", JSON.stringify(question))
+	goTo("delete_question.html")
+}
+
 
 
 function clearTable(table) {
@@ -159,6 +172,8 @@ function filterQuestions(){
 
 	ajaxCallQuestion("list", JSON.stringify(fields), "", order, sorted_by);
 }
+
+
 
 
 
