@@ -206,8 +206,10 @@ function ajaxCallToDelete(action, primary_key){
 				console.log(request.responseText)
 				var resp = JSON.parse(request.responseText);
 				//console.log(resp['status'])
-				if(resp['status']=="success")
+				if(resp['status']=="success"){
+					window.localStorage.removeItem("question_to_delete")
 					goTo('question_bank.html')
+				}
 				else{
 					console.log("Internal error: "+request.responseText)
 					flash(request.responseText, "#F45F63")

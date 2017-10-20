@@ -156,6 +156,20 @@ input {
   transition: background 0.3s ease-in-out;
 }
 
+.normal input {
+  background:#4788b2;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+
+
 #questions input:hover {
   background: #66c3ff;
   ;
