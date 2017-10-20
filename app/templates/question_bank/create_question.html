@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
-<body class="container">
+<body class="container" id="body_question">
 	<div id="header">
 		<span>
 			<div class="left" id="njit_logo">
@@ -31,6 +31,8 @@
 					</li>
 				</ul>
 			</div>
+					<div id="loader"></div>
+
 		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
@@ -45,13 +47,13 @@
 				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Create New Question
 				</div>
 				<!-- Small login form -->
-				<form name='form-create-question' id="form_create_question" >
+				<form name='form-create-question' id="form_create_question" onSubmit="submitQuestion(event)">
 					<div class="question-block">
 						<div class="left-block">
 							<label>Question: </label>
 						</div>
 						<div class="right-block other">
-							<input class="clean" type="text" id="question_name" placeholder="Enter question..." required="Missing question">
+							<input class="clean" type="text" id="question_text" placeholder="Enter question..." required="Missing question">
 						</div>
 					</div>
 					<div class="question-block">
@@ -59,7 +61,7 @@
 							<label>Function Name: </label>
 						</div>
 						<div class="right-block other">
-							<input class="clean" type="text" id="function_name" placeholder="Enter function name..." required="Missing function name." style="width: 60%">
+							<input class="clean" type="text" id="func_name" placeholder="Enter function name..." required="Missing function name." style="width: 60%">
 						</div>
 					</div>
 					<div class="question-block">
@@ -67,87 +69,37 @@
 							<label>Function Params: </label>
 						</div>
 						<div class="right-block other">
-							<input class="clean" type="text" id="function_name" placeholder="Enter function parameters..." required="Missing function name." style="width: 60%">
+							<input class="clean" type="text" id="param_names" placeholder="Enter function parameters..." required="Missing function name." style="width: 60%">
 						</div>
 					</div>
-					<div class="question-block" style="margin-bottom: 10px;">
-						<div class="super-block">
-							<div class="left-block">
+					<div class="question-block" style="margin-bottom: 10px;" id="test_cases">
+						<div class="super-block" id="block_0">
+							<div class="left-block" id="left_block_0">
 								<label>Test Cases:</label>
 							</div>
-							<div class="right-block">
+							<div class="right-block" id="right_block_0">
 								<div class="two-quarter" style="width: 40%">
-									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
+									<input class="clean" type="text" id="input_0" placeholder="Input..." required="">
 								</div>
 								<div class="quarter" style="width: 5%">&nbsp;</div>
 								<div class="two-quarter" style="width: 40%;">
-									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
+									<input class="clean" type="text" id="output_0" placeholder="Expected output..." required="">
 								</div>
 								<div class="quarter" style="width: 5%">&nbsp;</div>
 								<div class="quarter" style="width: 10%; float: right;" >
-									<input class="clean" type="submit" value="Add" style="width:100%">
-								</div>
-							</div>
-						</div>
-						<div class="super-block">
-							<div class="left-block">
-								<label>&nbsp;</label>
-							</div>
-							<div class="right-block">
-								<div class="two-quarter" style="width: 40%">
-									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="two-quarter" style="width: 40%;">
-									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="quarter" style="width: 10%; float: right;" >
-									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
-								</div>
-							</div>
-						</div>
-						<div class="super-block">
-							<div class="left-block">
-								<label>&nbsp;</label>
-							</div>
-							<div class="right-block">
-								<div class="two-quarter" style="width: 40%">
-									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="two-quarter" style="width: 40%;">
-									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="quarter" style="width: 10%; float: right;" >
-									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
-								</div>
-							</div>
-						</div>
-						<div class="super-block">
-							<div class="left-block">
-								<label>&nbsp;</label>
-							</div>
-							<div class="right-block">
-								<div class="two-quarter" style="width: 40%">
-									<input class="clean" type="text" id="function_name" placeholder="Input..." required="Missing input">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="two-quarter" style="width: 40%;">
-									<input class="clean" type="text" id="function_name" placeholder="Expected output..." required="Missing expected output">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="quarter" style="width: 10%; float: right;" >
-									<input class="clean" type="submit" value="Delete" style="width:100%; background:#d9534f;">
+									<input class="clean" type="button" value="Add" style="width:100%" onClick="addTestCase()">
 								</div>
 							</div>
 						</div>
 					</div>
 				</br>
+
 				<div>
+					<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('question_bank.html')">
 					<input class="clean" type="submit" value="Create">
 				</div>
+
+				
 			</form>
 		</div>
 	</div>
@@ -157,38 +109,6 @@
 </div>
 </div>
 </body>
-<script type="text/javascript">
-	
-	if(scrollBars()){
-		document.getElementById("footer").style.position = "relative";
-		document.getElementById("dropdown").style.position = "relative";
-	}
-	else{
-		document.getElementById("footer").style.position = "fixed";
-		document.getElementById("dropdown").style.position = "fixed";
-		console.log("fixed")
-	}
+<script type="text/javascript" src="../../static/js/question_handlers.js"></script>
 
-	function scrollBars(){
-		var body= document.getElementsByTagName("BODY")[0];
-		console.log(body.scrollHeight)
-		console.log(body.clientHeight)
-		return body.scrollHeight>body.clientHeight;	
-	}
-
-	function loadGeneral(){
-		var user_id = window.localStorage.getItem('user_id');
-		if(user_id == null)
-			window.location.replace("../login/login.html");
-
-		var role = window.localStorage.getItem('role');
-		document.getElementById("professor_id").innerHTML = jsUcfirst(role)+": "+user_id
-	}
-
-	function jsUcfirst(string) 
-	{
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	}
-	loadGeneral();
-</script>
 </html>
