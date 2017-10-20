@@ -14,6 +14,57 @@ window.onload=function(){
 	
 }; 
 
+var filterKeeper = 0
+
+
+//This function create a new node for the test case
+function addFilter(){
+	console.log("Adding a filter")
+	filterKeeper = filterKeeper+ 1;
+	var test_cases_node = document.getElementById("filters")
+	var new_div = document.createElement("div");
+	new_div.classList.add("super-block");
+	new_div.id = "block_"+filterKeeper
+	new_div.innerHTML = '<div class="left-block" id="left_block_0"><label>&nbsp;</label></div><div class="right-block" id="right_block_0"><div class="two-quarter" style="width: 40%"><select class="styled-select blue semi-square" id="filter_'+filterKeeper+'"><option value="">Select Filter</option><option value="primary_key">Primary Key</option><option value="question_text">Question Text</option></select></div><div class="quarter" style="width: 5%">&nbsp;</div><div class="two-quarter" style="width: 40%;"><input class="clean" type="text" id="filter_value_'+filterKeeper+'" placeholder="Filter value..." required=""></div><div class="quarter" style="width: 5%">&nbsp;</div><div class="quarter" style="width: 10%; float: right;" ><input class="clean" type="button" value="Delete" style="width:100%; background:#d9534f;" onClick="deleteFilter('+filterKeeper+')"></div></div>'
+	test_cases_node.appendChild(new_div);
+
+	document.getElementById("filter_add").disabled = true;
+
+	if(scrollBars()){
+		document.getElementById("footer").style.position = "relative";
+		document.getElementById("dropdown").style.position = "relative";
+	}
+	else{
+		document.getElementById("footer").style.position = "fixed";
+		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
+	}
+	console.log("Filter count: "+filterKeeper)
+
+}
+
+//This function deletes a node from the test cases.
+function deleteFilter(caseNumber){
+	console.log("Deleting a filter")
+	var current_test_case = document.getElementById("block_"+caseNumber)
+	current_test_case.remove();
+	document.getElementById("filter_add").disabled = false;
+
+	filterKeeper = filterKeeper - 1;
+	if(scrollBars()){
+		document.getElementById("footer").style.position = "relative";
+		document.getElementById("dropdown").style.position = "relative";
+	}
+	else{
+		document.getElementById("footer").style.position = "fixed";
+		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
+	}
+
+	console.log("Filter count: "+filterKeeper)
+}
+
+
 
 function questionList(response){
 	var items = response['items']
@@ -33,14 +84,14 @@ function questionList(response){
 		var question_name = document.createTextNode(items[item]['question_text']);
 		question_name_td.appendChild(question_name);
 
-		var edit_td = document.createElement("td");
-		edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
+		//var edit_td = document.createElement("td");
+		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var delete_td = document.createElement("td");
 		delete_td.innerHTML = '<div class="delete text-center"><input class="clean" type="button" value="Delete"></div>'
 
 		tr.appendChild(question_id_td);
 		tr.appendChild(question_name_td);
-		tr.appendChild(edit_td);
+		//tr.appendChild(edit_td);
 		tr.appendChild(delete_td);
 
 		table.appendChild(tr);
@@ -61,6 +112,57 @@ function questionList(response){
 }
 
 
+function clearTable(table) {
+  var rows = table.rows;
+  var i = rows.length;
+  while (--i) {
+    rows[i].parentNode.removeChild(rows[i]);
+    // or
+    // table.deleteRow(i);
+  }
+}
+
+
+
+function filterQuestions(){
+	console.log("Filtering questions")
+	var fields = {}
+	var sorted_by_obj = document.getElementById("sorted_by")
+	var sorted_by =  sorted_by_obj.options[sorted_by_obj.selectedIndex].value;
+
+	var order_obj = document.getElementById("order")
+	var order =  order_obj.options[order_obj.selectedIndex].value;
+
+	for(var i=0; i<=filterKeeper;i++){
+		var filter_obj = document.getElementById("filter_"+i)
+		var selected_filter = filter_obj.options[filter_obj.selectedIndex].value;
+		var filter_value = document.getElementById("filter_value_"+i).value
+
+		if(selected_filter != "" && filter_value!=""){
+			if(selected_filter in fields)
+				continue;
+			else
+				fields[selected_filter] = filter_value
+		}
+		
+	}
+
+	if(sorted_by == "")
+		order = ""
+
+	console.log("Order: "+order);
+	console.log("Sorted by: "+sorted_by);
+	console.log("Filters: "+JSON.stringify(fields))
+
+	var table = document.getElementById("question_table");
+	clearTable(table)
+
+	ajaxCallQuestion("list", JSON.stringify(fields), "", order, sorted_by);
+}
+
+
+
+
 
 /*
 The following function makes an ajax call to the questions resources to grab the list of questions
@@ -71,14 +173,14 @@ function ajaxCallQuestion(action, fields, primary_key, order, order_by){
 	if(fields != '')
 		data = data+',"fields":'+fields
 	if(primary_key != '')
-		data = data+',"primary_key":'+primary_key
+		data = data+',"primary_key":"'+primary_key+'"'
 	if(order!='')
-		data = data+',"order":'+order
+		data = data+',"order":"'+order+'"'
 	if(order_by!='')
-		data = data+',"order_by":'+order_by
+		data = data+',"order_by":"'+order_by+'"'
 	data = data + '}'
 
-	//console.log(data)
+	console.log(data)
 	//creating an ajax request object.
 	
 	var request = new XMLHttpRequest();
