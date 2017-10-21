@@ -36,11 +36,11 @@ function examsList(response){
 		exam_name_td.appendChild(exam_name);
 
 		var start_date_td = document.createElement("td");
-		var start_date = document.createTextNode(items[item]['start_date']);
+		var start_date = document.createTextNode(items[item]['start_date'].split(" ")[0]);
 		start_date_td.appendChild(start_date);
 
 		var end_date_td = document.createElement("td");
-		var end_date = document.createTextNode(items[item]['end_date']);
+		var end_date = document.createTextNode(items[item]['end_date'].split(" ")[0]);
 		end_date_td.appendChild(end_date);
 
 		var finalized = "Yes"
