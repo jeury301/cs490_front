@@ -136,6 +136,7 @@ function ajaxCallInsertQuestion(action, fields){
 		data = data+',"fields":'+fields
 	data = data + '}'
 	console.log(data)
+	
 	var request = new XMLHttpRequest();
 	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
 	request.open('POST', '../../controllers/question/question_front.php', true);
@@ -150,8 +151,10 @@ function ajaxCallInsertQuestion(action, fields){
 			console.log(request.responseText)
 			var resp = JSON.parse(request.responseText);
 			//console.log(resp['status'])
-			if(resp['status']=="success")
+			if(resp['status']=="success"){
+				console.log("stop")
 				submitTestCases(resp)
+			}
 			else{
 				console.log("Internal error: "+resp['internal_message'])
 				flash(request.responseText, "#F45F63")

@@ -31,7 +31,7 @@ function examsList(response){
 		exam_id_td.appendChild(exam_id);
 
 		var exam_name_td = document.createElement("td");
-		exam_name_td.id = "test_name"+items[item]['primary_key']
+		exam_name_td.id = "test_name_"+items[item]['primary_key']
 		var exam_name = document.createTextNode(items[item]['test_name']);
 		exam_name_td.appendChild(exam_name);
 
@@ -55,7 +55,7 @@ function examsList(response){
 		//var edit_td = document.createElement("td");
 		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var delete_td = document.createElement("td");
-		delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExame('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
+		delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExam('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
 
 		tr.appendChild(exam_id_td);
 		tr.appendChild(exam_name_td);
@@ -78,6 +78,16 @@ function examsList(response){
 
 	
 }
+
+function deleteExam(primary_key){
+	console.log("exam_primary_key: "+primary_key)
+	var test_name = String(document.getElementById("test_name_"+primary_key).textContent)
+	console.log("test_name: "+test_name)
+	var test = {"primary_key":primary_key, "test_name":test_name}
+	window.localStorage.setItem("exam_to_delete", JSON.stringify(test))
+	goTo("delete_exam.html")
+}
+
 
 /*
 The following function makes an ajax call to the questions resources to grab the list of questions
@@ -109,7 +119,7 @@ function ajaxCallExams(action, fields, primary_key, order, order_by){
 	//ajax request was successful
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			console.log(request.responseText)
+			//console.log(request.responseText)
 			var resp = JSON.parse(request.responseText);
 			//console.log(resp['status'])
 			if(resp['status']=="success")
