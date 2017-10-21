@@ -39,6 +39,14 @@ function goTo(page){
 }
 
 
+function goToModified(page, is_create){
+    window.location.replace(page);
+    
+    if(is_create)
+        window.localStorage.setItem('is_create', true);
+}
+
+
 /*
 The following function is called by loginAjaxHandler(). It creates, formats and displays a flash message on the login page. It recieves the message, 
 and the background color of the message (red, green).

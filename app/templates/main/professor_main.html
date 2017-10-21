@@ -7,29 +7,33 @@
 <html >
 <head>
 	<meta charset="UTF-8">
-	<title>Main - Professor</title>
+	<title>Professor - Main</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
-<body class="container">
+<body class="container" id="body_question">
 	<div id="header">
-		<div class="left" id="njit_logo">
-			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" height="25%" width="25%">
-		</div>
+		<span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
 
 			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px">
+				<ul>
+					<li>
+						<a id="professor_id">Professor ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="loader"></div>
 
-		<div class="right" id="dropdown">
-			<ul>
-				<li>
-					<a id="professor_id"></a>
-					<ul class="dropdown">
-					  <li><a href="javascript:logOut()">Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/professor_main.html" class="active">Main</a>
@@ -37,12 +41,59 @@
 		<a href="../question_bank/question_bank.html" >Question Bank</a>
 	</div>
 	<div id="body">
+		<div id="exams" class="exams-left" style="width: 63%; margin-bottom: 50px;">
+			<div id="create-exam">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Pending Review
+				</div>
+				<p>
+					The following is a list of exams pending for review...
+				</p>
+				<table style="width:100%; margin-bottom: 10px;" id="pending_review_table" >
+					<col width="40%">
+					<col width="40%">
+					<col width="20%">
+					<tr>
+						<th>Test Name</th>
+						<th>Student</th>
+						<th>Review</th>
+					</tr>
+
+				</table>
+				
+			</div>
+
+		</div>
+		<div class="exams-right" style="width: 2%">&nbsp;</div>
+		<div id="exams" class="exams-right" style="width: 35%;">
+			<div id="create-exam">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Quick Actions...
+				</div>
+				<!-- Small login form -->
+				<form name='form-delete-question' id="form_delete_question">
+					
+					<div >
+						<input class="clean" type="button" value="Create Exam" style="width: 100% !important;" onClick="goToModified('../exams/create_exam.html', true)">
+						
+					</div>
+				</form>
+				<form name='form-delete-question' id="form_delete_question">
+					
+					<div >
+						
+						<input class="clean" type="button" value="Create Question" onClick="goTo('../question_bank/create_question.html')" style="background:#5cb85c; width: 100% !important">
+					</div>
+				</form>
+			</div>
+		</div>
 		
+
 	</div>
+
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="../../static/js/logout.js"></script>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+
 </html>
