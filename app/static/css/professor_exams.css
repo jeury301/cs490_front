@@ -105,6 +105,15 @@ label
 }
 
 
+#create-exam form input[type="date"] {
+  background-color: #3b4148;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  height: 30px;
+  width: 100%;
+}
 
 
 
@@ -207,6 +216,17 @@ label
   margin-bottom: none;
 }
 
+.delete input {
+  background:#d9534f;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
 
 button {
  background-color: #d9534f !important;

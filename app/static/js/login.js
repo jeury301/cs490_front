@@ -132,7 +132,11 @@ function loginAjaxHandler(response){
 	}
 	else{
 		window.localStorage.setItem('user_id', parsed_resposne['items'][0].user_name);
+		window.localStorage.setItem('user_key', parsed_resposne['items'][0].primary_key);
 		window.localStorage.setItem('role', parsed_resposne['role'])
+		var professor_id = window.localStorage.getItem('user_key')
+		console.log("PROFESSOR ID: "+professor_id)
+
 		if(parsed_resposne['role']=="student"){
 			console.log("Student")
 			window.location.replace("../main/student_main.html");

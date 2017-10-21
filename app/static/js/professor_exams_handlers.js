@@ -11,7 +11,8 @@ window.onload=function(){
 
 }; 
 
-
+var question_count = 0;
+var questions_added = [];
 
 //Loading question bank
 function questionList(response){
@@ -62,12 +63,139 @@ function questionList(response){
 
 
 
+function submitExam(event){
+	event.preventDefault();
+
+	var loader = document.getElementById("loader");
+	loader.classList.add("loader");
+	disableScroll();
+
+	if(question_count == 0){
+		loader.classList.remove("loader");
+		flash("No questions have been added!", "#F45F63")
+		enableScroll();
+	}
+	else{
+		var professor_id = window.localStorage.getItem('user_key')
+		var test_name = document.getElementById("test_name").value;
+		var start_date = document.getElementById("start_date").value;
+		var end_date = document.getElementById("end_date").value;
+
+		var fields = {
+			"professor_id":professor_id,
+			"test_name":test_name,
+			"start_date":start_date,
+			"end_date":end_date,
+			"finalized":1,
+			"scores_released":0
+		}	
+
+		ajaxCallCreateTest("insert", JSON.stringify(fields), "", "", "")
+		
+	}
+
+}
+
+
+
+function addQuestionsToTest(response){
+	console.log("NEW EXAM HAS BEEN CREATED: "+JSON.stringify(response))
+}
+
+
+
+
 function addQuestion(question_id){
 	var question_text = document.getElementById("question_text_"+question_id).innerText
 	document.getElementById("question_to_add_"+question_id).disabled = true;
+	
+	var question_block = document.getElementById("question-block")
+	var new_div = document.createElement("div")
+	new_div.classList.add("question-block")
+	new_div.id = "question_id_"+question_id
+	question_count = question_count + 1
+	new_div.innerHTML = '<div class="left-block"> <label><input onClick="deleteQuestion('+question_id+')" class="delete-question" type="button" value="Delete" style="height: 30px; width: 100%"></label></div><div class="right-block other" style="margin-bottom: 30px;"> <label style="color:#5bc0de;" id="label_id_'+question_id+'">Q'+question_count+': '+question_text+'</label></div>'
 	console.log("question: "+question_text)
+
+	questions_added.push(question_id)
+	question_block.appendChild(new_div)
+	console.log("CURRENT QUESTIONS: "+JSON.stringify(questions_added))
 }
 
+
+
+function deleteQuestion(question_id){
+	var question_to_delete = document.getElementById('question_id_'+question_id)
+	question_to_delete.remove()
+	document.getElementById("question_to_add_"+question_id).disabled = false;
+	question_count = question_count - 1;
+
+	remove(questions_added, question_id);
+	console.log("CURRENT QUESTIONS: "+JSON.stringify(questions_added))
+}
+
+
+
+/*
+The following function makes an ajax call to the questions resources to grab the list of questions
+*/
+function ajaxCallCreateTest(action, fields, primary_key, order, order_by){
+	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	var data = 'json_string={"action":"'+action+'"'
+	if(fields != '')
+		data = data+',"fields":'+fields
+	if(primary_key != '')
+		data = data+',"primary_key":"'+primary_key+'"'
+	if(order!='')
+		data = data+',"order":"'+order+'"'
+	if(order_by!='')
+		data = data+',"order_by":"'+order_by+'"'
+	data = data + '}'
+
+	console.log(data)
+	//creating an ajax request object.
+	
+	var request = new XMLHttpRequest();
+	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
+	request.open('POST', '../../controllers/test/test_front.php', true);
+	//setting up the content type in the header to 'x-wwww-form-urlencoded'
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	//making ajax request.
+	request.send(data);
+
+	//ajax request was successful
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			var resp = JSON.parse(request.responseText);
+			//console.log(resp['status'])
+			if(resp['status']=="success")
+				addQuestionsToTest(resp)
+			else{
+				console.log("Internal error: "+resp['internal_message'])
+				flash(request.responseText, "#F45F63")
+				enableScroll();
+				loader.classList.remove("loader");
+			}
+
+		} else {
+			var resp = request.responseText;
+			console.log("Something major happened!")
+			console.log(request.responseText)
+			flash(request.responseText, "#F45F63")
+			enableScroll();
+			loader.classList.remove("loader");
+		}
+	};
+
+	//ajax request failed
+	request.onerror = function() {
+		console.log("Something went VERY VERY wrong")
+		flash("Something went VERY VERY wrong", "#F45F63")
+		enableScroll();
+		loader.classList.remove("loader");
+	};
+	
+}
 
 
 
@@ -124,48 +252,5 @@ function ajaxCallQuestion(action, fields, primary_key, order, order_by){
 	
 }
 
-
-
-
-
-//Helper functions!!!
-function loadGeneral(){
-	var user_id = window.localStorage.getItem('user_id');
-	if(user_id == null)
-		window.location.replace("../login/login.html");
-	
-	var role = window.localStorage.getItem('role');
-	document.getElementById("professor_id").innerHTML = jsUcfirst(role)+": "+user_id
-}
-
-
-
-function jsUcfirst(string) 
-{
-	return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-
-
-function logOut(){
-	console.log("Logging Out");
-	window.localStorage.removeItem('user_id');
-	window.localStorage.removeItem('role')
-	window.location.replace("../login/login.html");
-}
-
-
-function scrollBars(){
-	var body= document.getElementsByTagName("BODY")[0];
-	console.log(body.scrollHeight)
-	console.log(body.clientHeight)
-	return body.scrollHeight>body.clientHeight;	
-}
-
-
-
-function goTo(page){
-	window.location.replace(page);
-}
 
 loadGeneral()

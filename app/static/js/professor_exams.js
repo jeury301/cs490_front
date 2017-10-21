@@ -16,7 +16,7 @@ window.onload=function(){
 }; 
 
 
-function examList(response){
+function examsList(response){
 	var items = response['items']
 
 	console.log(items.length)
@@ -26,26 +26,43 @@ function examList(response){
 		//console.log("ITEM: "+JSON.stringify(items[item]))
 		var tr = document.createElement("tr");
 		
-		var question_id_td = document.createElement("td");
-		var question_id = document.createTextNode(items[item]['primary_key']);
-		question_id_td.appendChild(question_id);
+		var exam_id_td = document.createElement("td");
+		var exam_id = document.createTextNode(items[item]['primary_key']);
+		exam_id_td.appendChild(exam_id);
 
-		var question_name_td = document.createElement("td");
-		question_name_td.id = "question_text_"+items[item]['primary_key']
-		var question_name = document.createTextNode(items[item]['question_text']);
-		
-		question_name_td.appendChild(question_name);
+		var exam_name_td = document.createElement("td");
+		exam_name_td.id = "test_name"+items[item]['primary_key']
+		var exam_name = document.createTextNode(items[item]['test_name']);
+		exam_name_td.appendChild(exam_name);
+
+		var start_date_td = document.createElement("td");
+		var start_date = document.createTextNode(items[item]['start_date']);
+		start_date_td.appendChild(start_date);
+
+		var end_date_td = document.createElement("td");
+		var end_date = document.createTextNode(items[item]['end_date']);
+		end_date_td.appendChild(end_date);
+
+		var finalized = "Yes"
+
+		if (items[item]['finalized'] == "0")
+			finalized = "No"
+
+		var finalized_td = document.createElement("td");
+		var finalized_value = document.createTextNode(finalized);
+		finalized_td.appendChild(finalized_value);
 
 		//var edit_td = document.createElement("td");
 		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var delete_td = document.createElement("td");
-		delete_td.innerHTML = '<div class="delete text-center"><input class="clean" type="button" value="Delete" onClick="deleteQuestion('+items[item]['primary_key']+')"></div>'
+		delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExame('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
 
-		tr.appendChild(question_id_td);
-		tr.appendChild(question_name_td);
-		//tr.appendChild(edit_td);
+		tr.appendChild(exam_id_td);
+		tr.appendChild(exam_name_td);
+		tr.appendChild(start_date_td);
+		tr.appendChild(end_date_td);
+		tr.appendChild(finalized_td);
 		tr.appendChild(delete_td);
-
 		table.appendChild(tr);
 		
 	}
@@ -59,7 +76,6 @@ function examList(response){
 		console.log("fixed")
 	}
 
-	
 	
 }
 
@@ -97,7 +113,7 @@ function ajaxCallExams(action, fields, primary_key, order, order_by){
 			var resp = JSON.parse(request.responseText);
 			//console.log(resp['status'])
 			if(resp['status']=="success")
-				console.log(request.responseText)//examList(resp)c
+				examsList(resp)
 			else
 				console.log("Internal error: "+resp['internal_message'])
 			//console.log(JSON.stringify(response))
