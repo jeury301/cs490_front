@@ -61,5 +61,46 @@ function loadExamsToReview(action, fields, primary_key, order, order_by){
 
 
 function listExamsToRelease(response){
-	console.log(JSON.stringify(response))
+	var items = response['items']
+
+	console.log(items.length)
+	var table = document.getElementById("pending_review_table");
+
+	for (item in items){
+		//console.log("ITEM: "+JSON.stringify(items[item]))
+		var tr = document.createElement("tr");
+		
+		var exam_name_td = document.createElement("td");
+		var exam_name = document.createTextNode(items[item]['test_name']);
+		exam_name_td.appendChild(exam_name);
+		exam_name_td.id = "test_id_"+items[item]['primary_key']
+
+		var review_td = document.createElement("td");
+		review_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Release" onClick="releaseScore('+items[item]['primary_key']+')"></div>'
+		//var delete_td = document.createElement("td");
+		//delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExam('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
+
+		tr.appendChild(exam_name_td);
+		tr.appendChild(review_td);
+		table.appendChild(tr);
+		
+	}
+	if(scrollBars()){
+		document.getElementById("footer").style.position = "relative";
+		document.getElementById("dropdown").style.position = "relative";
+	}
+	else{
+		document.getElementById("footer").style.position = "fixed";
+		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
+	}
+	
 }
+
+
+function releaseScore(primary_key){
+	var test = {'primary_key':primary_key, 'test_name':document.getElementById('test_id_'+primary_key).textContent}
+	window.localStorage.setItem('test_to_release', JSON.stringify(test))
+	goTo('../exams/release_score.html')
+}
+

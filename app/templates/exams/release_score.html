@@ -1,0 +1,77 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 10/14/17
+**Purpose: This file contains the main professor page.
+-->
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Score Release - Professor</title>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+</head>
+
+<body class="container" id="body_question">
+	<div id="header">
+		<span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
+
+			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px">
+				<ul>
+					<li>
+						<a id="professor_id">Professor ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="loader"></div>
+
+		</span>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<a href="../main/professor_main.html">Main</a>
+		<a href="../exams/professor_exams.html" class="active">Exams</a>
+		<a href="../question_bank/question_bank.html" >Question Bank</a>
+	</div>
+	<div id="body">
+		<div id="questions">
+			<div id="create-question">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Release Exam Scores
+				</div>
+				<!-- Small login form -->
+				<form name='form-delete-exam' id="form_delete_exam">
+					<div class="question-block">
+						<div class="left-block" style="width: 50%">
+							<label>Are you sure you want to release the scores for this exam?</label>
+						</div>
+						<div class="left-block" style="width: 50%">
+							<label id="exam_to_release" style="font-weight: bold;"></label>
+						</div>
+					</div>		
+					<br>
+					<br>
+					<br>
+					<div >
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black; width: 10% !important" onClick="goTo('../main/professor_main.html')">
+						<input class="clean" type="button" value="Release" onClick="releaseScore()" style="width: 10% !important">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+<script type="text/javascript" src="../../static/js/release_score.js"></script>
+
+</html>

@@ -282,7 +282,75 @@ function questionAnswerInserted(response){
 	question_count = question_count -1
 
 	if(question_count == 0){
-		goTo('student_exams.html')
+		var student_id = window.localStorage.getItem('user_key');
+		var test_id = window.localStorage.getItem('exam_to_take');
+		var student_name = window.localStorage.getItem('user_id');
+		var test_name = window.localStorage.getItem('exam_name');
+
+		var fields = {
+			"student_id":student_id,
+			"test_id":test_id,
+			"student_name":student_name,
+			"test_name":test_name
+		}
+		ajaxInsertTestScore("insert", JSON.stringify(fields), "", "", "")
+
+		//goTo('student_exams.html')
 	}
 }
 
+
+
+/*
+The following function makes an ajax call to the questions resources to grab the list of questions
+*/
+function ajaxInsertTestScore(action, fields, primary_key, order, order_by){
+	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	var data = 'json_string={"action":"'+action+'"'
+	if(fields != '')
+		data = data+',"fields":'+fields
+	if(primary_key != '')
+		data = data+',"primary_key":"'+primary_key+'"'
+	if(order!='')
+		data = data+',"order":"'+order+'"'
+	if(order_by!='')
+		data = data+',"order_by":"'+order_by+'"'
+	data = data + '}'
+
+	console.log(data)
+	//creating an ajax request object.
+	
+	var request = new XMLHttpRequest();
+	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
+	request.open('POST', '../../controllers/test_score/test_score_front.php', true);
+	//setting up the content type in the header to 'x-wwww-form-urlencoded'
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	//making ajax request.
+	request.send(data);
+
+	//ajax request was successful
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			console.log(request.responseText)
+			var resp = JSON.parse(request.responseText);
+			if(resp['status']=="success"){
+				goTo('../main/student_main.html')
+			}
+			else
+				console.log("Internal error: "+resp['internal_message'])
+			//console.log(JSON.stringify(response))
+			//console.log(resp)
+		} else {
+			var resp = request.responseText;
+			console.log("Something major happened!")
+			console.log(JSON.stringify(resp))
+
+		}
+	};
+
+	//ajax request failed
+	request.onerror = function() {
+		console.log("Something went wrong")
+	};
+	
+}
