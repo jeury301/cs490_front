@@ -1,5 +1,6 @@
 
 var question_count = 0
+var question_ids_ultra = []
 
 window.onload=function(){
 	loadGeneral();
@@ -36,7 +37,7 @@ function createQuestionNode(response){
 	var exam_node = document.getElementById("question_list")
 	var new_div = document.createElement("div")
 	new_div.id = "question_wrapper_"+question['primary_key']
-	new_div.innerHTML = '<div id="questions"><div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="question_name_"'+question['primary_key']+'>'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label >Function Name: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="func_name_"'+question['primary_key']+'>'+question['func_name']+'</label></div></div><div class="question-block"><div class="left-block"><label>Function Params: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="param_names_"'+question['primary_key']+'>'+question['param_names']+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;"></textarea></div></div><br><div style="height: 430px"></div></form></div></div><br>'
+	new_div.innerHTML = '<div id="questions"><div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="question_name_"'+question['primary_key']+'>'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label >Function Name: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="func_name_"'+question['primary_key']+'>'+question['func_name']+'</label></div></div><div class="question-block"><div class="left-block"><label>Function Params: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="param_names_"'+question['primary_key']+'>'+question['param_names']+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;" required></textarea></div></div><br><div style="height: 430px"></div></form></div></div><br>'
 	exam_node.appendChild(new_div)
 
 	if(scrollBars()){
@@ -48,6 +49,8 @@ function createQuestionNode(response){
 		document.getElementById("dropdown").style.position = "fixed";
 		//console.log("fixed")
 	}
+
+	question_ids_ultra.push(question['primary_key'])
 
 	document.getElementById("student_answer_"+question['primary_key']).addEventListener('keydown',function(e) {
     if(e.keyCode === 9) { // tab was pressed
@@ -177,3 +180,109 @@ function ajaxCallExamQuestionsFinal(action, fields, primary_key, order, order_by
 	};
 	
 }
+
+
+function collectData() {
+	var student_id = window.localStorage.getItem('user_key')
+	var test_id = window.localStorage.getItem('exam_to_take');
+	
+	console.log("STUDENT ID: "+student_id)
+	console.log("TEST ID: "+test_id)
+
+	console.log(question_ids_ultra.length)
+
+	var is_empty = false
+
+	for(var i=0;i<question_ids_ultra.length;i++){
+		if(String(document.getElementById("student_answer_"+question_ids_ultra[i]).value)==""){
+			is_empty = true;
+			break;
+		}
+	}
+
+	if(is_empty){
+		flash("Make sure you asnwer all questions!", "#d9534f")
+	}{
+		for(var i=0;i<question_ids_ultra.length;i++){
+			var question_id = question_ids_ultra[i];
+			var answer_text = document.getElementById("student_answer_"+question_id).value
+
+			console.log("QUESTION ID: "+question_id)
+			console.log(answer_text)
+
+			var fields = {
+				"student_id":student_id,
+				"test_id":test_id,
+				"question_id":question_id,
+				"answer_text":answer_text
+			}
+
+			ajaxInsertQuestionAnswer("insert", JSON.stringify(fields), "", "", "")
+		}	
+	}
+	
+}
+
+
+/*
+The following function makes an ajax call to the questions resources to grab the list of questions
+*/
+function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
+	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	var data = 'json_string={"action":"'+action+'"'
+	if(fields != '')
+		data = data+',"fields":'+fields
+	if(primary_key != '')
+		data = data+',"primary_key":"'+primary_key+'"'
+	if(order!='')
+		data = data+',"order":"'+order+'"'
+	if(order_by!='')
+		data = data+',"order_by":"'+order_by+'"'
+	data = data + '}'
+
+	console.log(data)
+	//creating an ajax request object.
+	
+	var request = new XMLHttpRequest();
+	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
+	request.open('POST', '../../controllers/test_question/test_question_front.php', true);
+	//setting up the content type in the header to 'x-wwww-form-urlencoded'
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	//making ajax request.
+	request.send(data);
+
+	//ajax request was successful
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			var resp = JSON.parse(request.responseText);
+			//console.log(resp['status'])
+			if(resp['status']=="success")
+				listQuestionsExam(resp)
+			else
+				console.log("Internal error: "+resp['internal_message'])
+			//console.log(JSON.stringify(response))
+			//console.log(resp)
+		} else {
+			var resp = request.responseText;
+			console.log("Something major happened!")
+			console.log(JSON.stringify(resp))
+
+		}
+	};
+
+	//ajax request failed
+	request.onerror = function() {
+		console.log("Something went wrong")
+	};
+	
+}
+
+function questionAnswerInserted(response){
+	console.log(JSON.stringify(response))
+	question_count = question_count -1
+
+	if(question_count == 0){
+		goTo('student_exams.html')
+	}
+}
+
