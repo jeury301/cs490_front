@@ -132,6 +132,8 @@ input {
   transition: background 0.3s ease-in-out;
 }
 
+  
+
 .edit input {
   background:#5cb85c;
   margin-top: 10px;
@@ -143,6 +145,19 @@ input {
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
+
+.info input {
+  background:#5bc0de;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
 
 .delete input {
   background:#d9534f;

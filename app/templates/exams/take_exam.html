@@ -1,0 +1,115 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 10/14/17
+**Purpose: This file contains the main professor page.
+-->
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Exams - Student</title>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+</head>
+
+<body class="container">
+	<div id="header">
+		<div class="left" id="njit_logo">
+			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" height="25%" width="25%">
+		</div>
+		<div class="centered" id="app_title">
+			Moodle Replacement
+		</div>
+		<div class="right" id="dropdown">
+			<ul>
+				<li>
+					<a id="professor_id">Student ID</a>
+					<ul class="dropdown">
+						<li><a href="javascript:logOut()">Log out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<a href="../main/student_main.html">Main</a>
+		<a href="../exams/student_exams.html" class="active">Exams</a>
+		<a href="../grades/student_grades.html">Grades</a>
+
+	</div>
+	<div id="body">
+		<div id="questions">
+			<div id="create-question">
+				<div id="exam_name" style="font-size: 130% ;margin-bottom: 10px; text-align: center; font-weight: bold;">
+				</div>
+			</div>
+		</div>
+		<br>
+		<div id="question_list">
+			<!--
+			<div id="question_wrapper_id">
+				
+				<div id="questions">
+					<div id="create-question">
+						<form>
+							<div class="question-block">
+								<div class="left-block">
+									<label>Question: </label>
+								</div>
+								<div class="right-block other" style="margin-bottom: 25px;">
+									<label style="color:#5bc0de;">Q1: Bla bla bla</label>
+								</div>
+							</div>
+							<div class="question-block">
+								<div class="left-block">
+									<label >Function Name: </label>
+								</div>
+								<div class="right-block other" style="margin-bottom: 25px;">
+									<label style="color:#5bc0de;">My Func</label>
+								</div>
+							</div>
+							<div class="question-block">
+								<div class="left-block">
+									<label>Function Params: </label>
+								</div>
+								<div class="right-block other" style="margin-bottom: 25px;">
+									<label style="color:#5bc0de;">My function params</label>
+								</div>
+							</div>
+							<div class="question-block">
+								<div class="left-block">
+									<label>Answer: </label>
+								</div>
+								<div class="right-block other">
+									<textarea id="student_answer" rows="15" style="width: 100%; font-size: 16px;"></textarea>
+								</div>
+							</div>
+							<br>
+							<div style="height: 380px"></div>
+						</form>
+					</div>
+				</div>
+				<br>
+			</div>
+			-->
+		</div>
+		<div id="questions">
+			<div id="create-question">
+				<form>
+					<div style="text-align: center;">
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('../main/student_main.html')">
+						<input class="clean" type="submit" value="Submit">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+<script type="text/javascript" src="../../static/js/take_exam.js"></script>
+</html>
