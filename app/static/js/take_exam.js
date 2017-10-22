@@ -199,10 +199,11 @@ function collectData() {
 			break;
 		}
 	}
-
-	if(is_empty){
+	console.log("is_empty: "+is_empty)
+	if(is_empty == true){
 		flash("Make sure you asnwer all questions!", "#d9534f")
-	}{
+	}
+	{
 		for(var i=0;i<question_ids_ultra.length;i++){
 			var question_id = question_ids_ultra[i];
 			var answer_text = document.getElementById("student_answer_"+question_id).value
@@ -229,6 +230,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = fields.replaceAll("+", "%2B")
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -240,6 +242,8 @@ function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 		data = data+',"order_by":"'+order_by+'"'
 	data = data + '}'
 
+	//data.replaceAll("+", "%2B")
+	console.log("Replacement completed")
 	console.log(data)
 	//creating an ajax request object.
 	
@@ -256,8 +260,10 @@ function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 		if (request.status >= 200 && request.status < 400) {
 			console.log(request.responseText)
 			var resp = JSON.parse(request.responseText);
-			if(resp['status']=="success")
+			if(resp['status']=="success"){
 				questionAnswerInserted(resp)
+				console.log("STOP")
+			}
 			else
 				console.log("Internal error: "+resp['internal_message'])
 			//console.log(JSON.stringify(response))
@@ -291,7 +297,8 @@ function questionAnswerInserted(response){
 			"student_id":student_id,
 			"test_id":test_id,
 			"student_name":student_name,
-			"test_name":test_name
+			"test_name":test_name,
+			"scores_released":0
 		}
 		ajaxInsertTestScore("insert", JSON.stringify(fields), "", "", "")
 
@@ -354,3 +361,9 @@ function ajaxInsertTestScore(action, fields, primary_key, order, order_by){
 	};
 	
 }
+
+
+String.prototype.replaceAll = function(str1, str2, ignore) 
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+} 

@@ -7,9 +7,10 @@
 <html >
 <head>
 	<meta charset="UTF-8">
-	<title>Grades - Student</title>
+	<title>Exams - Student</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
@@ -26,7 +27,7 @@
 				<li>
 					<a id="professor_id">Student ID</a>
 					<ul class="dropdown">
-					  <li><a href="javascript:logOut()">Log out</a></li>
+						<li><a href="javascript:logOut()">Log out</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -38,27 +39,49 @@
 		<a href="../grades/student_grades.html" class="active">Grades</a>
 
 	</div>
+
 	<div id="body">
 		<div id="exams">
-			<div id="create-exam">
-				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">No grades to show yet!
+			<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">My Grades
+			</div>
+			<p>
+				The following is a list of your grades...
+			</p>
+			<table style="width:100%" id="student_grades">
+				<col width="50%">
+				<col width="50%">
+				<tr>
+					<th>Exam Name</th>
+					<th>Grade</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		<div id="questions">
+			<div id="create-question">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px; text-align: center;">Current Standing
 				</div>
 				<!-- Small login form -->
 				<form name='form-delete-exam' id="form_delete_exam">
 					<div class="question-block">
-						<div class="left-block" style="width: 100%;">
-							<label>Your grades have not been posted!</label>
+						<div class="left-block" style="width: 48.5%; text-align: right;">
+							<label>Your Grades Average is: </label>
+						</div>
+						<div class="left-block" style="width: 51.5%">
+							<label id="exam_to_remove" style="font-weight: bold;">100%</label>
 						</div>
 					</div>		
-					<div style="height: 30px"></div>
+					<br><div style="height: 10px"></div>
 				</form>
 			</div>
 		</div>
 	</div>
+
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="../../static/js/logout.js"></script>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+<script type="text/javascript" src="../../static/js/student_grades.js"></script>
 </html>

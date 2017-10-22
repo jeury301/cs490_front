@@ -131,6 +131,7 @@ The following function makes an ajax call to the questions resources to insert a
 */
 function ajaxCallInsertQuestion(action, fields){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = fields.replaceAll("+", "%2B")
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -260,6 +261,7 @@ The following function makes an ajax call to the test case resources resources t
 */
 function ajaxCallInsertTestCase(action, fields){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = fields.replaceAll("+", "%2B")
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -501,5 +503,9 @@ function msieversion()
 
 }
 
+String.prototype.replaceAll = function(str1, str2, ignore) 
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+} 
 
 loadGeneral();
