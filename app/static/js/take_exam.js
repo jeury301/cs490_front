@@ -245,7 +245,7 @@ function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 	
 	var request = new XMLHttpRequest();
 	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
-	request.open('POST', '../../controllers/test_question/test_question_front.php', true);
+	request.open('POST', '../../controllers/question_answer/question_answer_front.php', true);
 	//setting up the content type in the header to 'x-wwww-form-urlencoded'
 	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 	//making ajax request.
@@ -254,10 +254,10 @@ function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 	//ajax request was successful
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
+			console.log(request.responseText)
 			var resp = JSON.parse(request.responseText);
-			//console.log(resp['status'])
 			if(resp['status']=="success")
-				listQuestionsExam(resp)
+				questionAnswerInserted(resp)
 			else
 				console.log("Internal error: "+resp['internal_message'])
 			//console.log(JSON.stringify(response))
