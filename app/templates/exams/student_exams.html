@@ -38,29 +38,34 @@
 		<a href="../grades/student_grades.html">Grades</a>
 
 	</div>
+
 	<div id="body">
 		<div id="exams">
-			<div id="create-exam">
-				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">No Exams graded yet!
+			<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">My Exams
 				</div>
-				<!-- Small login form -->
-				<form name='form-delete-exam' id="form_delete_exam">
-					<div class="question-block">
-						<div class="left-block" style="width: 100%;">
-							<label>If you have recently submitted an exam, please wait until grades are released!</label>
-						</div>
-					</div>		
-					<div style="height: 30px"></div>
-				</form>
-			</div>
+			<p>
+				The following is a list of exams for which scores have been released...
+			</p>
+			<table style="width:100%" id="released_exams">
+				<col width="30%">
+				<col width="20%">
+				<col width="20%">
+				<col width="30%">
+				<tr>
+					<th>Exam Name</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Review Exam</th>
+				</tr>
+			</table>
 		</div>
 	</div>
+
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/helper_functions.js"></script>
-<script type="text/javascript" src="../../static/js/logout.js"></script>
-
+<script type="text/javascript" src="../../static/js/student_exams.js"></script>
 </html>
