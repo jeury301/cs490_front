@@ -9,6 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Grades - Student</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
@@ -37,7 +38,23 @@
 		<a href="../grades/student_grades.html" class="active">Grades</a>
 
 	</div>
-	<div id="body"></div>
+	<div id="body">
+		<div id="exams">
+			<div id="create-exam">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">No grades to show yet!
+				</div>
+				<!-- Small login form -->
+				<form name='form-delete-exam' id="form_delete_exam">
+					<div class="question-block">
+						<div class="left-block" style="width: 100%;">
+							<label>Your grades have not been posted!</label>
+						</div>
+					</div>		
+					<div style="height: 30px"></div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>

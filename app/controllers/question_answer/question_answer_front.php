@@ -2,12 +2,19 @@
 /*
 **Author: Jeury Mejia
 **Last Upated: 09/23/2017
-**Purpose: This php makes a curl request to the middle (login_middle.php) to authenticate the user
-to both NJIT and our own database. It is accessed through an ajax call from login.js.
+**Purpose: This php makes a curl request to the middle (question_middle.php) to access question resources
 */
 
 //initializing curl object
 $curl = curl_init();
+
+$rawjson = $_POST["json_string"];
+
+$data = array(
+  "json_string" => $rawjson,
+);
+
+$post_data = http_build_query($data);
 
 //creaing curl object.
 curl_setopt_array($curl, array(
@@ -18,12 +25,9 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"json_string\"\r\n\r\n" . $_POST['json_string'] . "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
-  CURLOPT_HTTPHEADER => array(
-    "cache-control: no-cache",
-    "content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-    "postman-token: 093db457-ce55-f649-c205-b2cbf97412e0"
-  ),
+  CURLOPT_POSTFIELDS => $post_data,
+  //CURLOPT_POSTFIELDS => "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"json_string\"\r\n\r\n" . $_POST['json_string'] . "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--",
+  CURLOPT_HTTPHEADER => array(),
 ));
 
 //executing curl call.
