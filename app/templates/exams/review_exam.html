@@ -34,11 +34,23 @@
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/student_main.html">Main</a>
-		<a href="../exams/student_exams.html" class="active">Exams</a>
-		<a href="../grades/student_grades.html">Grades</a>
+		<a href="../exams/student_exams.html" class="active">Grades</a>
+		<!--<a href="../grades/student_grades.html">Grades</a>-->
 
 	</div>
 	<div id="body">
+		<div id="questions">
+			<div id="create-question">
+				<form>
+					<div style="text-align: left;">
+						<input class="clean" type="button" value="Go Back" style="background: white; color: black; width: 10%" onClick="goTo('student_exams.html')">
+						<label style="float:right;" id="your_final_score">Your final score: </label>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<br>
 		<div id="questions">
 			<div id="create-question">
 				<div id="exam_name" style="font-size: 130% ;margin-bottom: 10px; text-align: center; font-weight: bold;">
@@ -47,6 +59,7 @@
 		</div>
 		<br>
 		<div id="question_list">
+			<!--
 			<div id="questions">
 				<div id="create-question">
 					<form>
@@ -55,7 +68,7 @@
 								<label>Question: </label>
 							</div>
 							<div class="right-block other" style="margin-bottom: 25px;">
-								<label style="color:#5bc0de;" id="question_name_" '+question['primary_key ']+'>'+question['question_text']+'</label>
+								<label style="color:#5bc0de;">'+question['question_text']+'</label>
 							</div>
 						</div>
 						<div class="question-block">
@@ -63,7 +76,7 @@
 								<label>Grade: </label>
 							</div>
 							<div class="right-block other" style="margin-bottom: 25px;">
-								<label style="color:#5bc0de;">90</label>
+								<label style="color:#5bc0de;">'+question['grade']+'</label>
 							</div>
 						</div>
 						<div class="question-block">
@@ -71,7 +84,7 @@
 								<label>Comments: </label>
 							</div>
 							<div class="right-block other" style="margin-bottom: 25px;">
-								<label style="color:#5bc0de;">Comments</label>
+								<label style="color:#5bc0de;">'+question['notes']+'</label>
 							</div>
 						</div>
 						<div class="question-block">
@@ -79,7 +92,7 @@
 								<label>Answer: </label>
 							</div>
 							<div class="right-block other">
-								<textarea rows="15" style="width: 100%; font-size: 16px;" required>Your Answer</textarea>
+								<textarea rows="15" style="width: 100%; font-size: 16px;" required>'+question['answer_text']+'</textarea>
 							</div>
 						</div>
 						<br>
@@ -87,17 +100,9 @@
 					</form>
 				</div>
 			</div>
-			<br>
+			<br>-->
 		</div>
-		<div id="questions">
-			<div id="create-question">
-				<form>
-					<div style="text-align: left;">
-						<input class="clean" type="button" value="Go Back" style="background: white; color: black;" onClick="goTo('student_exams.html')">
-					</div>
-				</form>
-			</div>
-		</div>
+		
 		
 	</div>
 	<div id="footer">

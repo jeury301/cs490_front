@@ -33,12 +33,13 @@ var items = response['items']
 		exam_name_td.appendChild(exam_name);
 
 		var exam_grade_td = document.createElement("td");
+		exam_grade_td.id = "test_exam_"+items[item]['primary_key']
 		var exam_grade = document.createTextNode(items[item]['grade']);
 		exam_grade_td.appendChild(exam_grade);
 		exam_grade_td.style.textAlign = "center"
 
 		var view_td = document.createElement("td");
-		view_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="View Results" onClick="viewResults('+items[item]['primary_key']+')"></div>'
+		view_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="View Results" onClick="viewResults('+items[item]['primary_key']+', '+items[item]['test_id']+')"></div>'
 		//var delete_td = document.createElement("td");
 		//delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExam('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
 
@@ -118,10 +119,10 @@ function ajaxCallStudentExams(action, fields, primary_key, order, order_by){
 
 
 
-function viewResults(primary_key){
+function viewResults(primary_key, test_id){
 	var test_name = document.getElementById('test_name_'+primary_key).textContent
-
-	window.localStorage.setItem('test_under_review', JSON.stringify({'test_name':test_name, 'test_id':primary_key}))
+	var test_exam = document.getElementById('test_exam_'+primary_key).textContent
+	window.localStorage.setItem('test_under_review', JSON.stringify({'test_name':test_name, 'test_id':test_id, 'test_score':test_exam}))
 	console.log("TEST ID: "+primary_key)	
 	console.log("TEST NAME: "+test_name)
 	goTo('review_exam.html')
