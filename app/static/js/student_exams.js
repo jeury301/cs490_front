@@ -115,3 +115,28 @@ function ajaxCallStudentExams(action, fields, primary_key, order, order_by){
 	};
 	
 }
+
+
+
+function viewResults(primary_key){
+	var test_name = document.getElementById('test_name_'+primary_key).textContent
+
+	window.localStorage.setItem('test_under_review', JSON.stringify({'test_name':test_name, 'test_id':primary_key}))
+	console.log("TEST ID: "+primary_key)	
+	console.log("TEST NAME: "+test_name)
+	goTo('review_exam.html')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

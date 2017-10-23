@@ -37,7 +37,7 @@ function createQuestionNode(response){
 	var exam_node = document.getElementById("question_list")
 	var new_div = document.createElement("div")
 	new_div.id = "question_wrapper_"+question['primary_key']
-	new_div.innerHTML = '<div id="questions"><div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="question_name_"'+question['primary_key']+'>'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label >Function Name: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="func_name_"'+question['primary_key']+'>'+question['func_name']+'</label></div></div><div class="question-block"><div class="left-block"><label>Function Params: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="param_names_"'+question['primary_key']+'>'+question['param_names']+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;" required></textarea></div></div><br><div style="height: 430px"></div></form></div></div><br>'
+	new_div.innerHTML = '<div id="questions"><div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="question_name_'+question['primary_key']+'">'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label >Function Name: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="func_name_"'+question['primary_key']+'>'+question['func_name']+'</label></div></div><div class="question-block"><div class="left-block"><label>Function Params: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="param_names_"'+question['primary_key']+'>'+question['param_names']+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;" required></textarea></div></div><br><div style="height: 430px"></div></form></div></div><br>'
 	exam_node.appendChild(new_div)
 
 	if(scrollBars()){
@@ -207,7 +207,7 @@ function collectData() {
 		for(var i=0;i<question_ids_ultra.length;i++){
 			var question_id = question_ids_ultra[i];
 			var answer_text = document.getElementById("student_answer_"+question_id).value
-
+			var question_name = document.getElementById("question_name_"+question_id).textContent
 			console.log("QUESTION ID: "+question_id)
 			console.log(answer_text)
 
@@ -215,9 +215,10 @@ function collectData() {
 				"student_id":student_id,
 				"test_id":test_id,
 				"question_id":question_id,
-				"answer_text":answer_text
+				"answer_text":answer_text,
+				"question_text":question_name
 			}
-
+			console.log(JSON.stringify(fields))
 			ajaxInsertQuestionAnswer("insert", JSON.stringify(fields), "", "", "")
 		}	
 	}
