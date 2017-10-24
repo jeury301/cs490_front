@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<title>Exams - Student</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
-	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
@@ -26,7 +26,7 @@
 				<li>
 					<a id="professor_id">Student ID</a>
 					<ul class="dropdown">
-					  <li><a href="javascript:logOut()">Log out</a></li>
+						<li><a href="javascript:logOut()">Log out</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -34,36 +34,36 @@
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/student_main.html">Main</a>
-		<a href="../exams/student_exams.html" class="active">Grades</a>
+		<a href="../exams/student_exams.html">Grades</a>
 		<!--<a href="../grades/student_grades.html">Grades</a>-->
 
 	</div>
-
 	<div id="body">
-		<div id="exams">
-			<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">My Exams
+		<div id="questions">
+			<div id="create-question">
+				<div id="exam_name" style="font-size: 130% ;margin-bottom: 10px; text-align: center; font-weight: bold;">
 				</div>
-			<p>
-				The following is a list of exams for which scores have been released...
-			</p>
-			<table style="width:100%" id="released_exams">
-				<col width="40%">
-				<col width="30%">
-				<col width="30%">
-				<tr>
-					<th>Exam Name</th>
-					<th>Grade</th>
-					<th>Review Results</th>
-				</tr>
-			</table>
+			</div>
+		</div>
+		<br>
+		<div id="question_list">
+		</div>
+		<div id="questions">
+			<div id="create-question">
+				<form>
+					<div style="text-align: center;">
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('../main/student_main.html')">
+						<input class="clean" type="button" value="Submit" onClick="collectData()">
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/helper_functions.js"></script>
-<script type="text/javascript" src="../../static/js/student_exams.js"></script>
+<script type="text/javascript" src="../../static/js/take_exam.js"></script>
 </html>

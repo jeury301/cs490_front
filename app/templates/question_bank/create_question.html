@@ -1,0 +1,111 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 10/14/17
+**Purpose: This file contains the main professor page.
+-->
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Question Bank - Professor</title>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+</head>
+
+<body class="container" id="body_question">
+	<div id="header">
+		<span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
+
+			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px">
+				<ul>
+					<li>
+						<a id="professor_id">Professor ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="loader"></div>
+
+		</span>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<a href="../main/professor_main.html">Main</a>
+		<a href="../exams/professor_exams.html">Exams</a>
+		<a href="../question_bank/question_bank.html" class="active">Question Bank</a>
+	</div>
+	<div id="body">
+		<div id="questions">
+			<div id="create-question">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Create New Question
+				</div>
+				<!-- Small login form -->
+				<form name='form-create-question' id="form_create_question" onSubmit="submitQuestion(event)">
+					<div class="question-block">
+						<div class="left-block">
+							<label>Question: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="question_text" placeholder="Enter question..." required="Missing question">
+						</div>
+					</div>
+					<div class="question-block">
+						<div class="left-block">
+							<label>Function Name: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="func_name" placeholder="Enter function name..." required="Missing function name." style="width: 60%">
+						</div>
+					</div>
+					<div class="question-block">
+						<div class="left-block">
+							<label>Function Params: </label>
+						</div>
+						<div class="right-block other">
+							<input class="clean" type="text" id="param_names" placeholder="Enter function parameters..." required="Missing function name." style="width: 60%">
+						</div>
+					</div>
+					<div class="question-block" style="margin-bottom: 10px;" id="test_cases">
+						<div class="super-block" id="block_0">
+							<div class="left-block" id="left_block_0">
+								<label>Test Cases:</label>
+							</div>
+							<div class="right-block" id="right_block_0">
+								<div class="two-quarter" style="width: 40%">
+									<input class="clean" type="text" id="input_0" placeholder="Input..." required="">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="two-quarter" style="width: 40%;">
+									<input class="clean" type="text" id="output_0" placeholder="Expected output..." required="">
+								</div>
+								<div class="quarter" style="width: 5%">&nbsp;</div>
+								<div class="quarter" style="width: 10%; float: right;" >
+									<input class="clean" type="button" value="Add" style="width:100%" onClick="addTestCase()">
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div >
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('question_bank.html')">
+						<input class="clean" type="submit" value="Create">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../static/js/question_handlers.js"></script>
+
+</html>

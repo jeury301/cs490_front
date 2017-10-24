@@ -120,16 +120,29 @@ function makeAjaxCall(user_name, password, role){
 
 function loginAjaxHandler(response){
 	var parsed_resposne = JSON.parse(response)
-	console.log(parsed_resposne)
-	if('error' in parsed_resposne){
-		user_message = parsed_resposne['user_message']
-		internal_message = parsed_resposne['internal_message']
+	if(parsed_resposne['status']=="error"){
+		var user_message = parsed_resposne['user_message']
+		var internal_message = 	parsed_resposne['internal_message']
 		
+		console.log("Internal Error: "+internal_message)
+		var error_mark = '<div style="font-size: 300%; width: 50px; float: left; margin-top:10px">&#xd7;&nbsp;</div>'
+		var message = error_mark+'<div style="font-size: 80%; width: 250px; float: left;">'+user_message+'</div>'
+
+		flash(message, "#F45F63")
 	}
 	else{
-		if(parsed_resposne['role']=="student")
+		window.localStorage.setItem('user_id', parsed_resposne['items'][0].user_name);
+		window.localStorage.setItem('user_key', parsed_resposne['items'][0].primary_key);
+		window.localStorage.setItem('role', parsed_resposne['role'])
+		var professor_id = window.localStorage.getItem('user_key')
+		console.log("PROFESSOR ID: "+professor_id)
+
+		if(parsed_resposne['role']=="student"){
+			console.log("Student")
 			window.location.replace("../main/student_main.html");
+		}
 		else{
+			console.log("Professor")
 			window.location.replace("../main/professor_main.html");
 		}
 	}
@@ -279,6 +292,7 @@ function msieversion()
         return true
     }
     return false;
+
 }
 
 

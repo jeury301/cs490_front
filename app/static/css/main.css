@@ -1,3 +1,4 @@
+
 html,
 body {
 	font: 87.5%/1.5em 'Open Sans', sans-serif;
@@ -10,21 +11,36 @@ body {
 	position:relative;
 }
 #header {
-	background: #2c3338;
+	background: #384751;
 	color: white;
 	padding: 1em;
 	width:100%;
-	height:60px;
+	height:110px;
 	font-size: 25px;
 	
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 #njit_logo {
 	display:inline-block;
-	margin-right:50%; 
+  position: relative;
 } 
+
+#njit_logo img {
+  width: 169px;
+  height: 66px;
+}
+
 #app_title {
 	text-align: center;
+  display:inline-block;
+  margin:0 auto;
+  width: 100%;
+  margin-top: -100px;
 } 
 
 .centered {
@@ -37,25 +53,32 @@ body {
 
 #body {
 	padding:10px;
+  margin-bottom: 60px;
 	padding-bottom:60px;   /* Height of the footer */
 }
+
 #footer {
-	position:absolute;
+	position: fixed;
 	bottom:0;
 	width:100%;
-	height:60px;   /* Height of the footer */
-	background: #2c3338;
+	height:40px;   /* Height of the footer */
+	background: #384751;
 	color: #606468;
 	clear: left;
 	text-align: center;
 	padding: 1em;
+  overflow-y: auto;
 }
 
 /* Add a black background color to the top navigation */
 .topnav {
-	background: #2c3338;
+	background: #384751;
 	overflow: hidden;
+  
+
 }
+
+
 
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -72,39 +95,154 @@ body {
 .topnav a:hover {
 	background-color: #ddd;
 	color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
 	background-color: white;
 	color: #606468;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
 }
+
+input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 0;
+  .clean{
+   -webkit-appearance: none;
+ }
+}
+
+
+#create input {
+  background: #4788b2;
+  margin-top: 10px;
+  border: 0;
+  width: 150px;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+  
+
+.edit input {
+  background:#5cb85c;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.info input {
+  background:#5bc0de;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+
+.delete input {
+  background:#d9534f;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.normal input {
+  background:#4788b2;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+
+
+#questions input:hover {
+  background: #66c3ff;
+  ;
+}
+
+#questions input:click {
+  background: #66c3ff;
+  ;
+}
+
 
 #dropdown{
-
-   position:fixed;
-   right:10px;
+   position: fixed;
+   /*right:10px;
    top:0px;
+   margin-right: 0px;*/
+   margin-left:82.5%;
+   width:14%;
+   margin-top:-107px;
 }
 
+#title{
+    width: 50%;
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+
 ul{
-    padding: 10px;
+    padding: 5px;
+    border-radius: 10px 5px 10px 5px;
     list-style: none;
     background: white;
     color:#606468;
+    text-align: center;
+
 }
+
+.text-center {
+  text-align: center;
+}
+
 ul li{
     display: inline-block;
     position: relative;
     line-height: 21px;
     text-align: left;
     font-size: 15px;
+    text-align: center;
 }
 ul li a{
     display: block;
-    padding: 2px 5px;
+    padding: 5px 5px;
     color: #606468;
     text-decoration: none;
+    min-width: 60px;
+
 }
 ul li a:hover{
     color: #fff;
@@ -123,3 +261,9 @@ ul li:hover ul.dropdown{
 ul li ul.dropdown li{
     display: block;
 }
+
+h4 {
+  font-weight: normal;
+}
+
+

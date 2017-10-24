@@ -1,0 +1,288 @@
+
+
+#create-question * {
+	box-sizing: border-box;
+}
+
+#filter-questions * {
+  box-sizing: border-box;
+}
+
+
+
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+	padding: 5px;
+
+}
+
+
+
+td {
+	padding: 5px;
+
+}
+
+#body{
+	padding: 20px;
+	border-color: black;
+	border-width: 2px;
+	
+}
+
+#questions{
+	padding: 20px;
+	background:#384751;
+ color: white;
+ /*background-color: #2c3338;*/
+
+ -moz-border-radius: 5px;
+ -webkit-border-radius: 5px; 
+}
+
+
+input {
+  border: none;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5em;
+  padding: 0;
+  .clean{
+   -webkit-appearance: none;
+ }
+}
+
+.regular {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+after { clear: both; }
+
+#create-question {
+  margin-left: 0;
+  width: 100%;
+}
+
+#create-question form {
+  margin: auto;
+  padding: 22px 22px 22px 22px;
+  width: 100%;
+  border-radius: 5px;
+  background: #282e33;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+  margin: auto;
+
+}
+
+#create-question form span {
+  background-color: #363b41;
+  border-radius: 3px 0px 0px 3px;
+  border-right: 3px solid #434a52;
+  color: #606468;
+  float: left;
+  line-height: 50px;
+  text-align: center;
+  
+}
+
+#create-question form input[type="text"] {
+  background-color: #3b4148;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  height: 30px;
+  width: 100%;
+}
+
+
+
+
+
+#create-question form input[type="submit"] {
+  background: #5cb85c;
+  border: 0;
+  width: 20%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#create-question form input[type="submit"]:hover {
+  background: #66c3ff;
+  ;
+}
+
+#create-question form input[type="submit"]:click {
+  background: #66c3ff;
+  ;
+}
+
+
+#create-question form input[type="button"] {
+  background: #4788b2;
+  border: 0;
+  width: 20%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+
+textarea {
+    resize: none;
+}
+
+#create-question form input[type="button"]:hover {
+  background: #66c3ff;
+  ;
+}
+
+#create-question form input[type="button"]:click {
+  background: #66c3ff;
+  ;
+}
+
+
+.submit-button {
+ background-color:  #5cb85c !important;
+ border-radius: 3px;
+ color: white;
+ width: 10% !important;
+ margin-bottom: 1em;
+ padding: 0 16px;
+ height: 30px;
+ width: 10%;
+}
+
+
+.reset{
+  border-radius: 3px;
+ color: white;
+ width: 10% !important;
+ margin-bottom: 1em;
+ padding: 0 16px;
+ height: 30px;
+}
+
+
+.filter-block {
+    width: 50%;
+    float: left;
+}
+
+
+.filter-block-left {
+    width: 70%;
+    float: left;
+}
+
+.filter-block-right {
+    width: 25%;
+    float: left;
+}
+
+
+label 
+{
+  /* Other styling.. */
+  text-align: left;
+  clear: both;
+  float:left;
+  margin-right:15px;
+  font-size: 16px;
+  color: white;
+  font-size: 16px;
+}
+
+
+
+.left-block {
+  width: 15%;
+  float: left;
+}
+.right-block {
+  width: 85%;
+  float: left;
+
+}
+
+.quarter {
+	width: 25%;
+	float: left;
+}
+
+.two-quarter {
+	width: 50%;
+	float: left;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  right: 30px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+body.noscroll
+{
+  position: fixed; 
+  overflow-y: auto;
+  width: 100%;
+}
+
+/*-------------------- Styling Select*/
+.styled-select {
+   overflow: hidden;
+   height: 35px;
+   width: 100%;
+   padding: 0 16px;
+   color: white;
+   border: none;
+   font-family: 'Open Sans', Arial, sans-serif;
+   font-size: 16px;
+}
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+
+/* -------------------- Colors: Background */
+.slate   { background-color: #ddd; }
+.green   { background-color: #779126; }
+.blue    { background-color: #4788b2; }
+.yellow  { background-color: #eec111; }
+.black   { background-color: #000; }
+
+/* -------------------- Colors: Text */
+.slate select   { color: #000; }
+.green select   { color: #fff; }
+.blue select    { color: #fff; }
+.yellow select  { color: #000; }
+.black select   { color: #fff; }

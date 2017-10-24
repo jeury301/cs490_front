@@ -1,0 +1,240 @@
+#body * {
+	box-sizing: border-box;
+}
+
+
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+	padding: 5px;
+
+}
+
+
+
+td {
+	padding: 5px;
+
+}
+
+
+label 
+{
+  /* Other styling.. */
+  text-align: left;
+  clear: both;
+  float:left;
+  margin-right:15px;
+  font-size: 16px;
+  color: white;
+  font-size: 16px;
+}
+
+
+#body{
+	padding: 20px;
+	border-color: black;
+	border-width: 2px;
+	
+  margin-bottom: 60px;
+  padding-bottom:60px;   /* Height of the footer */
+
+}
+
+#exams{
+	padding: 20px;
+	background:#384751;
+	 color: white;
+	 /*background-color: #2c3338;*/
+
+	 -moz-border-radius: 5px;
+	 -webkit-border-radius: 5px; 
+}
+
+.exams-left {
+	width: 50%;
+	float: left;
+}
+
+.exams-right {
+	width: 50%;
+	float: left;
+}
+
+
+#create-exam {
+  margin-left: 0;
+  width: 100%;
+}
+
+#create-exam form {
+  margin: auto;
+  padding: 22px 22px 22px 22px;
+  width: 100%;
+  border-radius: 5px;
+  background: #282e33;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+  margin: auto;
+
+}
+
+#create-exam form span {
+  background-color: #363b41;
+  border-radius: 3px 0px 0px 3px;
+  border-right: 3px solid #434a52;
+  color: #606468;
+  float: left;
+  line-height: 50px;
+  text-align: center;
+  
+}
+
+#create-exam form input[type="text"] {
+  background-color: #3b4148;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  height: 30px;
+  width: 100%;
+}
+
+
+#create-exam form input[type="date"] {
+  background-color: #3b4148;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  height: 30px;
+  width: 100%;
+}
+
+
+
+#create-exam form input[type="submit"] {
+  background: #5cb85c;
+  border: 0;
+  width: 20%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#create-exam form input[type="submit"]:hover {
+  background: #66c3ff;
+  ;
+}
+
+#create-exam form input[type="submit"]:click {
+  background: #66c3ff;
+  ;
+}
+
+
+#create-exam form input[type="button"] {
+  background: #4788b2;
+  border: 0;
+  width: 20%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+#create-exam form input[type="button"]:hover {
+  background: #66c3ff;
+  ;
+}
+
+#create-exam form input[type="button"]:click {
+  background: #66c3ff;
+  ;
+}
+
+.left-block {
+  width: 20%;
+  float: left;
+}
+.right-block {
+  width: 80%;
+  float: left;
+
+}
+
+.quarter {
+  width: 25%;
+  float: left;
+}
+
+.two-quarter {
+  width: 50%;
+  float: left;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  right: 30px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.submit-button {
+ background-color:   #4788b2 !important;
+ border-radius: 3px;
+ color: white;
+ margin-bottom: 1em;
+ padding: 0 16px;
+ height: 30px;
+}
+
+.delete-question {
+    background-color: #d9534f !important;
+ border-radius: 3px;
+ color: white;
+  padding: 0 16px;
+   height: 25px;
+
+  margin-bottom: none;
+}
+
+.delete input {
+  background:#d9534f;
+  margin-top: 10px;
+  border: 0;
+  width: 70%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button {
+ background-color: #d9534f !important;
+ border-radius: 3px;
+ color: white;
+  padding: 0 16px;
+   height: 25px;
+
+  margin-bottom: none;
+
+}

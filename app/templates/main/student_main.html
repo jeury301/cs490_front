@@ -7,39 +7,94 @@
 <html >
 <head>
 	<meta charset="UTF-8">
-	<title>Main - Student</title>
+	<title>Student - Main</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
-<body class="container">
+<body class="container" id="body_question">
 	<div id="header">
-		<div class="left" id="njit_logo">
-			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" height="25%" width="25%">
-		</div>
-		<div class="centered" id="app_title">
-			Moodle Replacement
-		</div>
-		<div class="right" id="dropdown">
-			<ul>
-				<li>
-					<a id="professor_id">Student ID</a>
-					<ul class="dropdown">
-					  <li><a href="javascript:logOut()">Log out</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+		<span>
+			<div class="left" id="njit_logo">
+				<img src="../../static/images/njit_logo.png" alt="NJIT Logo" >
+			</div>
+
+			<span id="title">Moodle Replacement</span>
+			<div class="right" id="dropdown" style="margin-top: -107px">
+				<ul>
+					<li>
+						<a id="professor_id">Student ID</a>
+						<ul class="dropdown">
+							<li><a href="javascript:logOut()">Log out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="loader"></div>
+
+		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
 		<a href="../main/student_main.html" class="active">Main</a>
-		<a href="../exams/student_exams.html" >Exams</a>
+		<a href="../exams/student_exams.html" >Grades</a>
+		<!--<a href="../grades/student_grades.html" >Grades</a>-->
 	</div>
-	<div id="body"></div>
+	<div id="body">
+		<div id="exams" class="exams-left" style="width: 63%; margin-bottom: 70px;">
+			<div id="create-exam">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Pending Exams
+				</div>
+				<p>
+					The following is a list of exams to take...
+				</p>
+				<table style="width:100%; margin-bottom: 10px;" id="exams_to_take_table" >
+					<col width="70%">
+					<col width="30%">
+					<tr>
+						<th>Test Name</th>
+						<th>Take Test</th>
+					</tr>
+
+				</table>
+				
+			</div>
+
+		</div>
+		<div class="exams-right" style="width: 2%">&nbsp;</div>
+		<div id="exams" class="exams-right" style="width: 35%;">
+			<div id="create-exam">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Quick Actions...
+				</div>
+				<!-- Small login form -->
+				<form name='form-delete-question' id="form_delete_question">
+					
+					<div >
+						<input class="clean" type="button" value="View Grades" style="width: 100% !important;" onClick="goToModified('../exams/student_exams.html', true)">
+						
+					</div>
+				</form>
+				<!--
+				<form name='form-delete-question' id="form_delete_question">
+					
+					<div >
+						
+						<input class="clean" type="button" value="View Grades" onClick="goTo('../grades/student_grades.html')" style="background:#5cb85c; width: 100% !important">
+					</div>
+				</form>
+			-->
+			</div>
+		</div>
+		
+
+	</div>
+
 	<div id="footer">
 		Copyright &copy; CS490
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="../../static/js/logout.js"></script>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+<script type="text/javascript" src="../../static/js/student_main.js"></script>
+
 </html>
