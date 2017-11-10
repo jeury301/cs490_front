@@ -7,8 +7,10 @@
 window.onload=function(){
 	console.log("Hello world")
 	//var fields = {"primary_key":5}
-	var fields = {}
+	
+	window.localStorage.removeItem("question_to_delete")
 	loadGeneral();
+	var fields = {}
 	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
 	
 	
@@ -80,6 +82,14 @@ function questionList(response){
 		var question_id = document.createTextNode(items[item]['primary_key']);
 		question_id_td.appendChild(question_id);
 
+		var topic_td = document.createElement("td");
+		var topic = document.createTextNode(items[item]['topic']);
+		topic_td.appendChild(topic);
+
+		var difficulty_td = document.createElement("td");
+		var difficulty = document.createTextNode(items[item]['difficulty']);
+		difficulty_td.appendChild(difficulty);
+
 		var question_name_td = document.createElement("td");
 		question_name_td.id = "question_text_"+items[item]['primary_key']
 		var question_name = document.createTextNode(items[item]['question_text']);
@@ -92,6 +102,9 @@ function questionList(response){
 		delete_td.innerHTML = '<div class="delete text-center"><input class="clean" type="button" value="Delete" onClick="deleteQuestion('+items[item]['primary_key']+')"></div>'
 
 		tr.appendChild(question_id_td);
+		tr.appendChild(topic_td);
+		tr.appendChild(difficulty_td);
+
 		tr.appendChild(question_name_td);
 		//tr.appendChild(edit_td);
 		tr.appendChild(delete_td);
@@ -162,6 +175,18 @@ function filterQuestions(){
 
 	if(sorted_by == "")
 		order = ""
+
+	var topic_obj = document.getElementById("topic")
+	var topic =  topic_obj.options[topic_obj.selectedIndex].value;
+
+	if(topic != "")
+		fields["topic"] = topic
+
+	var difficulty_obj = document.getElementById("difficulty")
+	var difficulty =  difficulty_obj.options[difficulty_obj.selectedIndex].value;
+
+	if(difficulty != "")
+		fields["difficulty"] = difficulty
 
 	console.log("Order: "+order);
 	console.log("Sorted by: "+sorted_by);

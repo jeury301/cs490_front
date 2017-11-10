@@ -41,8 +41,8 @@ function logOut(){
 
 function scrollBars(){
 	var body= document.getElementsByTagName("BODY")[0];
-	console.log(body.scrollHeight)
-	console.log(body.clientHeight)
+	//console.log(body.scrollHeight)
+	//console.log(body.clientHeight)
 	return body.scrollHeight>body.clientHeight;	
 }
 
@@ -99,14 +99,14 @@ function flash(message, color) {
     //handling multiple browsers...
     if(msieversion()){
     	//this is the way to display the flash message, if browser is IE or EDGE
-    	console.log("This is IE")
+    	//console.log("This is IE")
     	login_body.insertBefore(new_flash,(login_body.hasChildNodes())
                             ? login_body.childNodes[0]
                             : null);
     }
     else{
     	//this is the way to display te flash message, if browser is not IE nor EDGE
-    	console.log("This is not IE")
+    	//console.log("This is not IE")
     	login_body.prepend(new_flash)
 
     }

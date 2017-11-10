@@ -79,8 +79,10 @@
 								<div class="two-quarter" style="width: 100%">
 									<select  class="styled-select blue semi-square" id="sorted_by">
 										<option value="">Select Sorted by</option>
-										<option value="primary_key">Primary Key</option>
+										<option value="difficulty">Difficulty</option>
 										<option value="question_text">Question Text</option>
+										<option value="primary_key">Primary Key</option>
+										<option value="topic">Topic</option>
 									</select>
 								</div>
 							</div>
@@ -110,12 +112,12 @@
 							</div>
 							<div class="right-block" id="right_block_0" style="width: 70%" >
 								<div class="two-quarter" style="width: 100%">
-									<select  class="styled-select blue semi-square" id="sorted_by">
+									<select  class="styled-select blue semi-square" id="topic">
 										<option value="">Select Topic</option>
 										<option value="Arrays">Arrays</option>
 										<option value="Conditionals">Conditionals</option>
 										<option value="Loops">Loops</option>
-										<option value="Conditionals">Recursion</option>
+										<option value="Recursion">Recursion</option>
 										<option value="Functions">Strings</option>
 									</select>
 								</div>
@@ -130,11 +132,11 @@
 							</div>
 							<div class="right-block" id="right_block_0" style="width: 70%">
 								<div class="two-quarter" style="width: 100%">
-									<select  class="styled-select blue semi-square" id="order">
+									<select  class="styled-select blue semi-square" id="difficulty">
 										<option value="">Select Difficulty</option>
-										<option value="easy">Easy</option>
-										<option value="medium">Medium</option>
-										<option value="hard">Hard</option>
+										<option value="Easy">Easy</option>
+										<option value="Medium">Medium</option>
+										<option value="Hard">Hard</option>
 
 									</select>
 								</div>
@@ -160,11 +162,15 @@
 			</p>
 			<table style="width:100%" id="question_table">
 				<col width="10%">
-				<col width="70%">
+				<col width="10%">
+				<col width="10%">
+				<col width="50%">
 				<!--<col width="15%">-->
 				<col width="20%">
 				<tr>
 					<th>Question ID</th>
+					<th>Topic</th>
+					<th>Difficulty</th>
 					<th>Question Text</th>
 					<!--<th>Edit</th>--> 
 					<th>Delete</th>
@@ -178,5 +184,6 @@
 	</div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
 <script type="text/javascript" src="../../static/js/question.js"></script>
 </html>

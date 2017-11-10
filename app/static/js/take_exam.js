@@ -261,7 +261,7 @@ function ajaxInsertQuestionAnswer(action, fields, primary_key, order, order_by){
 	//ajax request was successful
 	request.onload = function() {
 		if (request.status >= 200 && request.status < 400) {
-			console.log(request.responseText)
+			console.log("Response from Middle: "+request.responseText)
 			var resp = JSON.parse(request.responseText);
 			if(resp['status']=="success"){
 				questionAnswerInserted(resp)

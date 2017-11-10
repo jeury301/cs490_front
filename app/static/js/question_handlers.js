@@ -6,6 +6,9 @@ window.onload=function(){
 		var question = JSON.parse(question)['question_text'];
 		document.getElementById("question_to_remove").innerHTML = "Q: "+question
 	}
+
+	var fields = {}
+	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
 }; 
 
 
@@ -85,9 +88,17 @@ function submitQuestion(event){
 	var param_names = document.getElementById("param_names").value;
 	console.log("function params: "+param_names)
 
-	var fields = {"question_text":question_text, "func_name":func_name, "param_names":param_names}
+	var topic_obj = document.getElementById("topic")
+	var topic =  topic_obj.options[topic_obj.selectedIndex].value;
 
+	console.log("topic: "+topic)
 
+	var difficulty_obj = document.getElementById("difficulty")
+	var difficulty =  difficulty_obj.options[difficulty_obj.selectedIndex].value;
+
+	console.log("difficulty: "+difficulty)
+
+	var fields = {"question_text":question_text, "func_name":func_name, "param_names":param_names, "topic":topic, "difficulty":difficulty}
 
 	ajaxCallInsertQuestion("insert", JSON.stringify(fields))
 }
@@ -216,7 +227,8 @@ function ajaxCallToDelete(action, primary_key){
 				}
 				else{
 					console.log("Internal error: "+request.responseText)
-					flash(request.responseText, "#F45F63")
+					
+					flash(resp['user_message'], "#F45F63")
 					enableScroll();
 					loader.classList.remove("loader");
 

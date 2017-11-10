@@ -63,7 +63,7 @@ function loadExamsToReview(action, fields, primary_key, order, order_by){
 function listExamsToRelease(response){
 	var items = response['items']
 
-	console.log(items.length)
+	//console.log(items.length)
 	var table = document.getElementById("pending_review_table");
 
 	for (item in items){

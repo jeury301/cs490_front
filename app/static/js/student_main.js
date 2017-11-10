@@ -1,6 +1,6 @@
 
 window.onload=function(){
-	console.log("Hello world")
+	//console.log("Hello world")
 	//var fields = {"primary_key":5}
 	var fields = {}
 	loadGeneral();
@@ -8,7 +8,7 @@ window.onload=function(){
 	ajaxCallExams("list_available_for_student", JSON.stringify(fields), student_key, "", "");
 	
 	var exam_just_taken = window.localStorage.getItem("exam_just_taken")
-	console.log(exam_just_taken)
+	//cconsole.log(exam_just_taken)
 	if(exam_just_taken == "yes"){
 		flash("Exam successfully submitted!", "#01BC9F")
 		window.localStorage.removeItem("exam_just_taken")

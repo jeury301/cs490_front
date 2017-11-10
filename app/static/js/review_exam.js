@@ -15,7 +15,7 @@ window.onload=function(){
 		color = "#d9534f"
 	if(score >= 70 && score < 90)
 		color = "#428bca"
-	if(score > 90)
+	if(score >= 90)
 		color = "#5cb85c"
 
 	document.getElementById('your_final_score').innerHTML = 'Your final score: <strong style="color:'+color+'">&nbsp;'+score+'%</strong>'
@@ -49,14 +49,14 @@ function listExamsToTake(response){
 		var new_div = document.createElement("div")
 		new_div.id = "questions"
 		var notes = JSON.parse(question['notes'])['comments']
-		var comments = '<ul style="text-align:left">'
+		var comments = '<ul style="text-align:left!important;">'
 		for(var j=0; j<notes.length;j++){
-			comments += '<p style="width:100%"><li >'+notes[j]+'</li></p>'
+			comments += '<p style="width:100%"><li style="text-align:left!important;">'+notes[j]+'</li></p>'
 			
 		}
 		comments += "</ul>"
 		height += notes.length * 50
-		new_div.innerHTML = '<div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label>Grade: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['grade']+'</label></div></div><div class="question-block"><div class="left-block"><label>Comments: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+comments+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea rows="15" style="width: 100%; font-size: 16px;" readonly>'+question['answer_text']+'</textarea></div></div><br><div style="height: '+height+'px"></div></form></div>'
+		new_div.innerHTML = '<div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label>Grade: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['grade']+" / "+question['point_value']+'</label></div></div><div class="question-block"><div class="left-block"><label>Comments: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+comments+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea rows="15" style="width: 100%; font-size: 16px;" readonly>'+question['answer_text']+'</textarea></div></div><br><div style="height: '+height+'px"></div></form></div>'
 		exam_node.appendChild(new_div)
 
 		var new_br = document.createElement("br")

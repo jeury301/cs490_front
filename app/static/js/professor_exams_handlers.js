@@ -20,7 +20,7 @@ window.onload=function(){
 
 var question_count = 0;
 var questions_added = [];
-
+var questions_map = {}
 //Loading question bank
 function questionList(response){
 	var items = response['items']
@@ -31,7 +31,7 @@ function questionList(response){
 	for (item in items){
 		//console.log("ITEM: "+JSON.stringify(items[item]))
 		var tr = document.createElement("tr");
-		
+		questions_map[items[item]['primary_key']] = items[item]
 		//var question_id_td = document.createElement("td");
 		//var question_id = document.createTextNode(items[item]['primary_key']);
 		//question_id_td.appendChild(question_id);
@@ -185,9 +185,10 @@ function addQuestionsToTest(response){
 	for(var i=0; i < questions_added.length; i++){
 		var fields = {
 			"test_id":test_id,
-			"question_id":questions_added[i]
+			"question_id":questions_added[i],
+			"point_value":document.getElementById("point_value_"+questions_added[i]).value
 		}
-
+		console.log(JSON.stringify(fields))
 		ajaxCallCreateTestQuestion("insert", JSON.stringify(fields), "", "", "")
 	}
 
@@ -207,20 +208,31 @@ function testQuestionCreated(response){
 
 
 function addQuestion(question_id){
+	var question = questions_map[question_id]
+	console.log(JSON.stringify(question))
+	
+	var default_point_value = question['default_point_value']
 	var question_text = document.getElementById("question_text_"+question_id).innerText
 	document.getElementById("question_to_add_"+question_id).disabled = true;
-	
+	var question_len = (question_text.length)*.6
 	var question_block = document.getElementById("question-block")
 	var new_div = document.createElement("div")
 	new_div.classList.add("question-block")
 	new_div.id = "question_id_"+question_id
 	question_count = question_count + 1
-	new_div.innerHTML = '<div class="left-block"> <label><input onClick="deleteQuestion('+question_id+')" class="delete-question" type="button" value="Delete" style="height: 30px; width: 100%"></label></div><div class="right-block other" style="margin-bottom: 30px;"> <label style="color:#5bc0de;" id="label_id_'+question_id+'">Q'+question_count+': '+question_text+'</label></div>'
+	new_div.innerHTML = `<div class="left-block" style="width: 15%"> <label><input onClick="deleteQuestion(`+question_id+`)" class="delete-question" type="button" value="Delete" style="height: 30px; width: 100%"></label></div>
+						 <div class="left-block" style="width: 53%;"> <label style="color:#5bc0de;" id="label_id_`+question_id+`">Q`+question_count+`: `+question_text+`</label></div>
+						 <div class="left-block" style="width: 2%"></div>
+						 <div class="left-block" style="width: 18%;" ><label id="point_value_id_`+question_id+`">Point Value:</label></div>
+						 <div class="left-block" style="width: 1%"></div>
+						 <div class="right-block other" style="width:11%;margin-bottom: `+question_len+`px;"> <input class="clean" type="text" id="point_value_`+question_id+`" value="`+default_point_value+`"></div>`
 	console.log("question: "+question_text)
 
 	questions_added.push(question_id)
 	question_block.appendChild(new_div)
+
 	console.log("CURRENT QUESTIONS: "+JSON.stringify(questions_added))
+	
 }
 
 

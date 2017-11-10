@@ -19,7 +19,7 @@ window.onload=function(){
 function examsList(response){
 	var items = response['items']
 
-	console.log(items.length)
+	//console.log(items.length)
 	var table = document.getElementById("exams_table");
 
 	for (item in items){
@@ -35,13 +35,14 @@ function examsList(response){
 		var exam_name = document.createTextNode(items[item]['test_name']);
 		exam_name_td.appendChild(exam_name);
 
-		var start_date_td = document.createElement("td");
-		var start_date = document.createTextNode(items[item]['start_date'].split(" ")[0]);
-		start_date_td.appendChild(start_date);
+		var released = "Yes"
 
-		var end_date_td = document.createElement("td");
-		var end_date = document.createTextNode(items[item]['end_date'].split(" ")[0]);
-		end_date_td.appendChild(end_date);
+		if (items[item]['scores_released'] == "0")
+			released = "No"
+
+		var released_td = document.createElement("td");
+		var released_value = document.createTextNode(released);
+		released_td.appendChild(released_value);
 
 		var finalized = "Yes"
 
@@ -59,9 +60,8 @@ function examsList(response){
 
 		tr.appendChild(exam_id_td);
 		tr.appendChild(exam_name_td);
-		tr.appendChild(start_date_td);
-		tr.appendChild(end_date_td);
 		tr.appendChild(finalized_td);
+		tr.appendChild(released_td);
 		tr.appendChild(delete_td);
 		table.appendChild(tr);
 		
@@ -172,8 +172,8 @@ function logOut(){
 
 function scrollBars(){
 	var body= document.getElementsByTagName("BODY")[0];
-	console.log(body.scrollHeight)
-	console.log(body.clientHeight)
+	//console.log(body.scrollHeight)
+	//console.log(body.clientHeight)
 	return body.scrollHeight>body.clientHeight;	
 }
 
