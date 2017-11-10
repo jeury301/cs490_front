@@ -1,4 +1,18 @@
 //Helper functions!!!
+
+window.addEventListener('resize', function(){
+    if(scrollBars()){
+        document.getElementById("footer").style.position = "relative";
+        document.getElementById("dropdown").style.position = "relative";
+    }
+    else{
+        document.getElementById("footer").style.position = "fixed";
+        document.getElementById("dropdown").style.position = "fixed";
+        //console.log("fixed")
+    }
+});
+
+
 function loadGeneral(){
 	var user_id = window.localStorage.getItem('user_id');
 	if(user_id == null)

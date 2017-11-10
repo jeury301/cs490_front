@@ -211,6 +211,16 @@ label
 }
 
 
+.questions-left {
+  width: 50%;
+  float: left;
+}
+
+.questions-right {
+  width: 50%;
+  float: right;
+}
+
 
 .left-block {
   width: 15%;

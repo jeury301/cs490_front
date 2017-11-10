@@ -160,14 +160,12 @@ function submitExam(event){
 	else{
 		var professor_id = window.localStorage.getItem('user_key')
 		var test_name = document.getElementById("test_name").value;
-		var start_date = document.getElementById("start_date").value;
-		var end_date = document.getElementById("end_date").value;
+		//var start_date = document.getElementById("start_date").value;
+		//var end_date = document.getElementById("end_date").value;
 
 		var fields = {
 			"professor_id":professor_id,
 			"test_name":test_name,
-			"start_date":start_date,
-			"end_date":end_date,
 			"finalized":1,
 			"scores_released":0
 		}	
