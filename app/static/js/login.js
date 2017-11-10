@@ -65,10 +65,10 @@ makeAjaxCall(username, password).
 function userLogin(){
 	var user_name = document.getElementById('user');
 	var password = document.getElementById('pass');
-	var role = document.getElementById('professor').checked? "professor" : "student";
+	//var role = document.getElementById('professor').checked? "professor" : "student";
 	
-	console.log("role: "+role)
-	makeAjaxCall(user_name.value, password.value, role);
+	//console.log("role: "+role)
+	makeAjaxCall(user_name.value, password.value);
 }
 
 
@@ -77,10 +77,10 @@ The following function is called by userLogin(), and it recieves the username an
 It firsts creates a formatted string to make an ajax call to the back of the front (login.php). After the ajax call 
 is completed, loginAjaxHandler(message) is called to hanlde the response recieved.
 */
-function makeAjaxCall(user_name, password, role){
+function makeAjaxCall(user_name, password){
 	
 	//building string to send through an ajax call to the back of the front (login.php) in the format required for 'x-www-form-urlencoded'
-	var data = 'json_string={"action":"login","username":"'+user_name+'","plaintext_password":"'+password+'","role":"'+role+'"}'
+	var data = 'json_string={"action":"login","username":"'+user_name+'","plaintext_password":"'+password+'"}'
 
 	//creating an ajax request object.
 	var request = new XMLHttpRequest();
