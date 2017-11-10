@@ -7,7 +7,12 @@ window.onload=function(){
 	var student_key = window.localStorage.getItem('user_key')
 	ajaxCallExams("list_available_for_student", JSON.stringify(fields), student_key, "", "");
 	
-	
+	var exam_just_taken = window.localStorage.getItem("exam_just_taken")
+	console.log(exam_just_taken)
+	if(exam_just_taken == "yes"){
+		flash("Exam successfully submitted!", "#01BC9F")
+		window.localStorage.removeItem("exam_just_taken")
+	}
 }; 
 
 
