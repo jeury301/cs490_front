@@ -167,9 +167,28 @@ textarea {
  margin-bottom: 1em;
  padding: 0 16px;
  height: 30px;
- width: 10%;
 }
 
+.max-submit-button{
+  background-color:  #5cb85c !important;
+ border-radius: 3px;
+ color: white;
+ margin-bottom: 1em;
+ padding: 0 16px;
+ height: 30px;
+ width: 100% !important;
+}
+
+.sub-submit-button {
+  background-color:  #5cb85c !important;
+ border-radius: 3px;
+ color: white;
+ margin-bottom: 1em;
+ padding: 0 16px;
+ height: 30px;
+ width: 20% !important;
+ text-align: center;
+}
 
 .reset{
   border-radius: 3px;

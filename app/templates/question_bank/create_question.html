@@ -75,7 +75,7 @@
 									<option value="Conditionals">Conditionals</option>
 									<option value="Loops">Loops</option>
 									<option value="Recursion">Recursion</option>
-									<option value="Functions">Strings</option>
+									<option value="Strings">Strings</option>
 								</select>
 							</div>
 						</div>
@@ -139,28 +139,6 @@
 				<!-- Small login form -->
 				<form name='form-create-question' id="form_create_question" onSubmit="filterQuestions(event)">
 					<div class="filter-block-left" id="filters" style="width: 100%; margin-bottom: 20px;">
-						<div class="super-block" id="block_0">
-							<div class="left-block" id="left_block_0">
-								<label>Filters: </label>
-							</div>
-							<div class="right-block" id="right_block_0">
-								<div class="two-quarter" style="width: 40%">
-									<select class="styled-select blue semi-square" id="filter_0">
-										<option value="">Select Filter</option>
-										<option value="primary_key">Primary Key</option>
-										<option value="question_text">Question Text</option>
-									</select>
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="two-quarter" style="width: 40%;">
-									<input class="clean" type="text" id="filter_value_0" placeholder="Filter value..." required="">
-								</div>
-								<div class="quarter" style="width: 5%">&nbsp;</div>
-								<div class="quarter" style="width: 10%; float: right;" >
-									<input class="clean" type="button" value="Add" style="width:100%" onClick="addFilter()" id="filter_add">
-								</div>
-							</div>
-						</div>
 						<div class="super-block">
 							<div class="left-block" style="width: 30%">
 								<label>Sorted by: </label>
@@ -169,8 +147,10 @@
 								<div class="two-quarter" style="width: 100%">
 									<select  class="styled-select blue semi-square" id="sorted_by">
 										<option value="">Select Sorted by</option>
-										<option value="primary_key">Primary Key</option>
+										<option value="topic">Topic</option>
+										<option value="difficulty">Difficulty</option>
 										<option value="question_text">Question Text</option>
+
 									</select>
 								</div>
 							</div>
@@ -206,7 +186,7 @@
 										<option value="Conditionals">Conditionals</option>
 										<option value="Loops">Loops</option>
 										<option value="Conditionals">Recursion</option>
-										<option value="Functions">Strings</option>
+										<option value="Strings">Strings</option>
 									</select>
 								</div>
 							</div>
@@ -233,8 +213,8 @@
 					</div>
 					<br>
 					<div >
-						<input class="clean" type="button" value="Reset" style="background: white; color: black;" onClick="goTo('question_bank.html')">
-						<input class="clean" type="submit" value="Filter">
+						<input class="clean" type="button" value="Reset" style="background: white; color: black;" onClick="resetFilter()">
+						<input class="sub-submit-button clean" type="button" value="Filter" onClick="filterQuestions()">
 					</div>
 				</form>
 
@@ -250,20 +230,17 @@
 				<p>
 					The following is a list of questions that have been added to the question bank...
 				</p>
-				<table style="width:100%" id="question_table">
-				<col width="10%">
-				<col width="10%">
-				<col width="10%">
-				<col width="70%">
-				<!--<col width="15%">-->
-				<tr>
-					<th>Question ID</th>
-					<th>Topic</th>
-					<th>Difficulty</th>
-					<th>Question Text</th>
-				</tr>
-				
-			</table>
+				<table style="width:100%; margin-bottom: 10px;" id="question_table" >
+					<col width="10%">
+					<col width="10%">
+					<col width="80%">
+					<tr>
+						<th>Topic</th>
+						<th>Difficulty</th>
+						<th>Question Text</th>
+					</tr>
+
+				</table>
 
 			</div>
 		</div>

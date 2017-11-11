@@ -36,6 +36,14 @@ function questionList(response){
 		//var question_id = document.createTextNode(items[item]['primary_key']);
 		//question_id_td.appendChild(question_id);
 
+		var difficulty_td = document.createElement("td");
+		var difficulty = document.createTextNode(items[item]['difficulty']);
+		difficulty_td.appendChild(difficulty);
+
+		var topic_td = document.createElement("td");
+		var topic = document.createTextNode(items[item]['topic']);
+		topic_td.appendChild(topic);
+
 		var question_name_td = document.createElement("td");
 		question_name_td.id = "question_text_"+items[item]['primary_key']
 		var question_name = document.createTextNode(items[item]['question_text']);
@@ -45,7 +53,10 @@ function questionList(response){
 		//var edit_td = document.createElement("td");
 		//edit_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Edit" onClick="edit('+items[item]['primary_key']+')"></div>'
 		var add_td = document.createElement("td");
-		add_td.innerHTML = '<div class="text-center"><input class="submit-button clean" type="button" value="Add" onClick="addQuestion('+items[item]['primary_key']+')" id="question_to_add_'+items[item]['primary_key']+'"></div>'
+		add_td.innerHTML = '<div class="text-center" ><input class="max-submit-button clean" type="button" value="Add" onClick="addQuestion('+items[item]['primary_key']+')" id="question_to_add_'+items[item]['primary_key']+'"></div>'
+
+		tr.appendChild(difficulty_td);
+		tr.appendChild(topic_td);
 
 		tr.appendChild(question_name_td);
 		//tr.appendChild(edit_td);
@@ -427,6 +438,64 @@ function ajaxCallQuestion(action, fields, primary_key, order, order_by){
 		console.log("Something went wrong")
 	};
 	
+}
+
+
+
+function clearTable(table) {
+  var rows = table.rows;
+  var i = rows.length;
+  while (--i) {
+    rows[i].parentNode.removeChild(rows[i]);
+    // or
+    // table.deleteRow(i);
+  }
+}
+
+
+
+function filterQuestions(){
+	console.log("Filtering questions")
+	var fields = {}
+	var sorted_by_obj = document.getElementById("sorted_by")
+	var sorted_by =  sorted_by_obj.options[sorted_by_obj.selectedIndex].value;
+
+	var order_obj = document.getElementById("order")
+	var order =  order_obj.options[order_obj.selectedIndex].value;
+
+	
+
+	if(sorted_by == "")
+		order = ""
+
+	var topic_obj = document.getElementById("topic")
+	var topic =  topic_obj.options[topic_obj.selectedIndex].value;
+
+	if(topic != "")
+		fields["topic"] = topic
+
+	var difficulty_obj = document.getElementById("difficulty")
+	var difficulty =  difficulty_obj.options[difficulty_obj.selectedIndex].value;
+
+	if(difficulty != "")
+		fields["difficulty"] = difficulty
+
+	console.log("Order: "+order);
+	console.log("Sorted by: "+sorted_by);
+	console.log("Filters: "+JSON.stringify(fields))
+
+	var table = document.getElementById("question_table");
+	clearTable(table)
+
+	ajaxCallQuestion("list", JSON.stringify(fields), "", order, sorted_by);
+}
+
+
+function resetFilter(){
+	var table = document.getElementById("question_table");
+	clearTable(table)
+   ajaxCallQuestion("list", JSON.stringify({}), "", "", "");
+
 }
 
 

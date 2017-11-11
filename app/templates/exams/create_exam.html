@@ -10,6 +10,7 @@
 	<title>Question Bank - Professor</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
@@ -40,7 +41,7 @@
 		<a href="../exams/professor_exams.html" class="active">Exams</a>
 		<a href="../question_bank/question_bank.html" >Question Bank</a>
 	</div>
-	<div id="body">
+	<div id="body" style="margin-bottom: 50px;">
 		<div id="exams" class="exams-left" style="width: 55%;">
 			<div id="create-exam">
 				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Create New Exam
@@ -55,90 +56,141 @@
 							<input class="clean" type="text" id="test_name" placeholder="Enter exam name..." required="Missing exam name">
 						</div>
 					</div>
-					<!--
-					<div class="question-block">
-						<div class="left-block" style="width: 25%">
-							<label>Start Date: </label>
-						</div>
-						<div class="right-block other" style="width: 75%;">
-							<input class="clean" type="date" id="start_date"  required="Missing start date" style="width: 50%;">
-						</div>
-					</div>
-
-					<div class="question-block">
-						<div class="left-block" style="width: 25%">
-							<label>End Date: </label>
-						</div>
-						<div class="right-block other" style="width: 75%;">
-							<input class="clean" type="date" id="end_date" required="Missing end date" style="width: 50%;">
-						</div>
-					</div>
-				-->
-				<div id="question-block">
-					<div class="question-block">
-						<div class="left-block" style="width: 100%; text-align:center !important; margin-bottom: 20px;">
-							<label>Exam Questions - <small style="color: #a9a9a9;">add new questions from the question bank</small></label>
-						</div>
-					</div>
-					<!--
-					<div class="question-block">
-						<div class="left-block" style="width: 15%"> 
-							<label>
-								<input onClick="deleteQuestion('+question_id+')" class="delete-question" type="button" value="Delete" style="height: 30px; width: 100%">
-							</label>
-						</div>
-						<div class="right-block" style="width: 53%">
-							<label style="color:#5bc0de;" id="label_id_'+question_id+'">Q'+question_count+': '+question_text+'</label>
-						</div>
-						<div class="right-block" style="width: 2%"></div>
-						<div class="right-block other" style="width: 18%">
-							<label id="point_value_id_'+question_id+'">Point Value:</label>
-						</div>
-						<div class="right-block" style="width: 1%"></div>
-						<div class="right-block other" style="width: 11%">
-							<input class="clean" type="text" id="point_value_'+question_id+'" value="''">
-						</div>
-					</div>
-					-->
 					
-					
+					<div id="question-block">
+						<div class="question-block">
+							<div class="left-block" style="width: 100%; text-align:center !important; margin-bottom: 20px;">
+								<label>Exam Questions - <small style="color: #a9a9a9;">add new questions from the question bank</small></label>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div >
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('professor_exams.html')">
+						<input class="clean" type="submit" value="Create">
+					</div>
+				</form>
 			</div>
-			<br>
-			<div >
-				<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('professor_exams.html')">
-				<input class="clean" type="submit" value="Create">
-			</div>
-		</form>
-	</div>
-</div>
-<div class="exams-right" style="width: 2%">&nbsp;</div>
-<div id="exams" class="exams-right" style="width: 43%; margin-bottom: 50px;">
-	<div id="create-exam">
-		<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Question Bank
 		</div>
-		<p>
-			The following is a list of questions that have been added to the question bank...
-		</p>
-		<table style="width:100%; margin-bottom: 10px;" id="question_table" >
-			<col width="80%">
-			<col width="20%">
-			<tr>
-				<th>Question Text</th>
-				<!--<th>Edit</th>--> 
-				<th>Add To Exam</th>
-			</tr>
+		<div class="exams-right" style="width: 2%">&nbsp;</div>
+		<div id="exams" class="exams-right" style="margin-bottom: 10px; width: 43%">
+			<div id="create-question" style="margin-bottom: 10px">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Filter Questions
+				</div>
+				<!-- Small login form -->
+				<form name='form-create-question' id="form_create_question" onSubmit="filterQuestions(event)">
+					<div class="filter-block-left" id="filters" style="width: 100%; margin-bottom: 20px;">
+						
+						<div class="super-block">
+							<div class="left-block" style="width: 30%">
+								<label>Sorted by: </label>
+							</div>
+							<div class="right-block" id="right_block_0" style="width: 70%">
+								<div class="two-quarter" style="width: 100%">
+									<select  class="styled-select blue semi-square" id="sorted_by">
+										<option value="">Select Sorted by</option>
+										<option value="topic">Topic</option>
+										<option value="difficulty">Difficulty</option>
+										<option value="question_text">Question Text</option>
 
-		</table>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							&nbsp;
+						</div>
+						<div class="super-block">
+							<div class="left-block" style="width: 30%">
+								<label>Order: </label>
+							</div>
+							<div class="right-block" id="right_block_0" style="width: 70%">
+								<div class="two-quarter" style="width: 100%">
+									<select  class="styled-select blue semi-square" id="order">
+										<option value="asc">Ascending</option>
+										<option value="desc">Descending</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							&nbsp;
+						</div>
+						<div class="super-block">
+							<div class="left-block" style="width: 30%">
+								<label>Topic: </label>
+							</div>
+							<div class="right-block" id="right_block_0" style="width: 70%" >
+								<div class="two-quarter" style="width: 100%">
+									<select  class="styled-select blue semi-square" id="topic">
+										<option value="">Select Topic</option>
+										<option value="Arrays">Arrays</option>
+										<option value="Conditionals">Conditionals</option>
+										<option value="Loops">Loops</option>
+										<option value="Recursion">Recursion</option>
+										<option value="Strings">Strings</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="super-block">
+							&nbsp;
+						</div>
+						<div class="super-block" style="margin-bottom: 20px;">
+							<div class="left-block" style="width: 30%">
+								<label>Difficulty: </label>
+							</div>
+							<div class="right-block" id="right_block_0" style="width: 70%">
+								<div class="two-quarter" style="width: 100%">
+									<select  class="styled-select blue semi-square" id="difficulty">
+										<option value="">Select Difficulty</option>
+										<option value="easy">Easy</option>
+										<option value="medium">Medium</option>
+										<option value="hard">Hard</option>
 
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div >
+						<input class="clean" type="button" value="Reset" style="background: white; color: black;" onClick="resetFilter()">
+						<input class="sub-submit-button clean" type="button" value="Filter" onClick="filterQuestions()">
+					</div>
+				</form>
+
+			</div>
+			<div id="create-question" style="margin-top: 20px;">
+				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Question Bank
+				</div>
+				<p>
+					The following is a list of questions that have been added to the question bank...
+				</p>
+				<form>
+					<table style="width:100%; margin-bottom: 10px;" id="question_table" >
+						<col width="7.5%">
+						<col width="7.5%">
+						<col width="70%">
+						<col width="15%">
+						<tr>
+							<th>Difficulty</th>
+							<th>Topic</th>
+							<th>Question Text</th>
+							<!--<th>Edit</th>--> 
+							<th>Add To Exam</th>
+						</tr>
+
+					</table>
+				</form>
+			</div>
+		</div>
+		
 	</div>
 
-</div>
-
-</div>
-
-<div id="footer">
-	Copyright &copy; CS490
-</div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/helper_functions.js"></script>
