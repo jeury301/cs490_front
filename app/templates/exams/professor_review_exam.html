@@ -1,0 +1,114 @@
+<!--
+**Author: Jeury Mejia
+**Last Updated: 10/14/17
+**Purpose: This file contains the main professor page.
+-->
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="UTF-8">
+	<title>Exams - Student</title>
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+</head>
+
+<body class="container">
+	<div id="header">
+		<div class="left" id="njit_logo">
+			<img src="../../static/images/njit_logo.png" alt="NJIT Logo" height="25%" width="25%">
+		</div>
+		<div class="centered" id="app_title">
+			Moodle Replacement
+		</div>
+		<div class="right" id="dropdown">
+			<ul>
+				<li>
+					<a id="professor_id">Professor ID</a>
+					<ul class="dropdown">
+						<li><a href="javascript:logOut()">Log out</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="topnav" id="myTopnav">
+		<a href="../main/professor_main.html">Main</a>
+		<a href="../exams/professor_exams.html" class="active">Exams</a>
+		<a href="../question_bank/question_bank.html" >Question Bank</a>
+	</div>
+	<div id="body">
+		<div id="questions">
+			<div id="create-question">
+				<form>
+					<div style="text-align: left;">
+						<input class="clean" type="button" value="Go Back" style="background: white; color: black; width: 10%" onClick="goTo('review_exams.html')">
+						<label style="float:right;" id="your_final_score">Student final score: </label>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<br>
+		<div id="questions">
+			<div id="create-question">
+				<div id="exam_name" style="font-size: 130% ;margin-bottom: 10px; text-align: center; font-weight: bold;">
+				</div>
+			</div>
+		</div>
+		<br>
+		<div id="question_list">
+			<!--
+			<div id="questions">
+				<div id="create-question">
+					<form>
+						<div class="question-block">
+							<div class="left-block">
+								<label>Question: </label>
+							</div>
+							<div class="right-block other" style="margin-bottom: 25px;">
+								<label style="color:#5bc0de;">'+question['question_text']+'</label>
+							</div>
+						</div>
+						<div class="question-block">
+							<div class="left-block">
+								<label>Grade: </label>
+							</div>
+							<div class="right-block other" style="margin-bottom: 25px;">
+								<label style="color:#5bc0de;">'+question['grade']+'</label>
+							</div>
+						</div>
+						<div class="question-block">
+							<div class="left-block">
+								<label>Comments: </label>
+							</div>
+							<div class="right-block other" style="margin-bottom: 25px;">
+								<label style="color:#5bc0de;">'+question['notes']+'</label>
+							</div>
+						</div>
+						<div class="question-block">
+							<div class="left-block">
+								<label>Answer: </label>
+							</div>
+							<div class="right-block other">
+								<textarea rows="15" style="width: 100%; font-size: 16px;" required>'+question['answer_text']+'</textarea>
+							</div>
+						</div>
+						<br>
+						<div style="height: 430px"></div>
+					</form>
+				</div>
+			</div>
+			<br>-->
+		</div>
+		
+		
+	</div>
+	<div id="footer">
+		Copyright &copy; CS490
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="../../static/js/helper_functions.js"></script>
+<script type="text/javascript" src="../../static/js/professor_review_exam.js"></script>
+</html>

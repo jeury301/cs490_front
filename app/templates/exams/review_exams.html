@@ -7,13 +7,14 @@
 <html >
 <head>
 	<meta charset="UTF-8">
-	<title>Score Release - Professor</title>
+	<title>Question Bank - Professor</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
+	<link rel = "stylesheet" type = "text/css" href = "../../static/css/professor_exams.css" />
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
 </head>
 
-<body class="container" id="body_question">
+<body class="container">
 	<div id="header">
 		<span>
 			<div class="left" id="njit_logo">
@@ -21,7 +22,7 @@
 			</div>
 
 			<span id="title">Moodle Replacement</span>
-			<div class="right" id="dropdown" style="margin-top: -107px">
+			<div class="right" id="dropdown" style="margin-top: -107px;">
 				<ul>
 					<li>
 						<a id="professor_id">Professor ID</a>
@@ -31,8 +32,6 @@
 					</li>
 				</ul>
 			</div>
-			<div id="loader"></div>
-
 		</span>
 	</div>
 	<div class="topnav" id="myTopnav">
@@ -43,27 +42,35 @@
 	<div id="body">
 		<div id="questions">
 			<div id="create-question">
-				<div id="form_header" style="font-size: 130% ;margin-bottom: 10px;">Release Exam Scores
+				<div id="exam_name" style="font-size: 130% ;margin-bottom: 10px; text-align: center; font-weight: bold;">
 				</div>
-				<!-- Small login form -->
-				<form name='form-delete-exam' id="form_delete_exam">
-					<div class="question-block">
-						<div class="left-block" style="width: 50%">
-							<label>Are you sure you want to release the scores for this exam?</label>
-						</div>
-						<div class="left-block" style="width: 50%">
-							<label id="exam_to_release" style="font-weight: bold;"></label>
-						</div>
-					</div>		
-					<br>
-					<br>
-					<br>
-					<div >
-						<input class="clean" type="button" value="Cancel" style="background: white; color: black; width: 10% !important" onClick="goToPage('../main/professor_main.html')">
-						<input class="clean" type="button" value="Release" onClick="releaseScore()" style="width: 10% !important">
-					</div>
-				</form>
 			</div>
+		</div>
+		<br>
+		<div id="exams">
+			<div id="create">
+				<input class="clean" type="button" value="Back" style="background: white; color: black;" onClick="goTo('../main/professor_main.html')">
+
+				<input class="clean" type="button" value="Release Scores" onclick="releaseScores()">
+			</div>
+			<p>
+				The following is a list of students who took this exam
+			</p>
+			<table style="width:100%" id="student_exams_table">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+				<col width="20%">
+				<tr>
+					<th>Student ID</th>
+					<th>Student Name</th>
+					<th>% Score</th>
+					<th>Raw Score</th>
+					<th>Review Exam</th>
+				</tr>
+				
+			</table>
 		</div>
 	</div>
 	<div id="footer">
@@ -72,6 +79,5 @@
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/helper_functions.js"></script>
-<script type="text/javascript" src="../../static/js/release_score.js"></script>
-
+<script type="text/javascript" src="../../static/js/review_exams.js"></script>
 </html>

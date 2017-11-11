@@ -1,7 +1,8 @@
 window.onload=function(){
 	loadGeneral();
 	var exam_to_release = 	JSON.parse(window.localStorage.getItem('test_to_release'));
-	
+	var exam_to_review = window.localStorage.getItem('exam_to_review')
+	console.log("exam_to_review: "+exam_to_review)
 	document.getElementById('exam_to_release').innerHTML = exam_to_release.test_name
 	
 };
@@ -11,6 +12,16 @@ function releaseScore(){
 	var exam_to_release = 	JSON.parse(window.localStorage.getItem('test_to_release')).primary_key;
 	console.log("I AM SUPPOSED TO RELEASE: "+exam_to_release)
 	releaseScoresAjax("edit", JSON.stringify({"scores_released":1}), exam_to_release, "", "")
+}
+
+
+function goToPage(page){
+	if(window.localStorage.getItem('exam_to_review')){
+		goTo("review_exams.html")
+	}
+	else{
+		goTo(page)
+	}
 }
 
 

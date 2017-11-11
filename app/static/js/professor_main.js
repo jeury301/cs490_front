@@ -3,6 +3,10 @@ window.onload=function(){
 	loadGeneral();
 	loadExamsToReview("list_test_to_be_released", JSON.stringify(fields), "", "", "");
 	
+	var exam_to_review = window.localStorage.getItem('exam_to_review')
+
+	if(exam_to_review)
+		window.localStorage.removeItem('exam_to_review')
 }; 
 
 
@@ -76,12 +80,18 @@ function listExamsToRelease(response){
 		exam_name_td.id = "test_id_"+items[item]['primary_key']
 
 		var review_td = document.createElement("td");
-		review_td.innerHTML = '<div class="edit text-center"><input class="clean success" type="button" value="Release" onClick="releaseScore('+items[item]['primary_key']+')"></div>'
+		review_td.innerHTML = '<div class="edit text-center"><input class="clean" type="button" value="Review" onClick="reviewExams('+items[item]['primary_key']+')"></div>'
+		
+		var release_td = document.createElement("td");
+		release_td.innerHTML = '<div class="info text-center"><input class="clean success" type="button" value="Release" onClick="releaseScore('+items[item]['primary_key']+')"></div>'
+		
+
 		//var delete_td = document.createElement("td");
 		//delete_td.innerHTML = '<div class="text-center delete"><input class="clean" type="button" value="Delete" onClick="deleteExam('+items[item]['primary_key']+')" id="exam_to_delete_'+items[item]['primary_key']+'"></div>'
 
 		tr.appendChild(exam_name_td);
 		tr.appendChild(review_td);
+		tr.appendChild(release_td);
 		table.appendChild(tr);
 		
 	}
@@ -96,6 +106,14 @@ function listExamsToRelease(response){
 	}
 	
 }
+
+
+function reviewExams(primary_key){
+	window.localStorage.setItem("exam_to_review", primary_key)
+	window.localStorage.setItem("test_name", document.getElementById('test_id_'+primary_key).textContent)
+	goTo("../exams/review_exams.html")
+}
+
 
 
 function releaseScore(primary_key){
