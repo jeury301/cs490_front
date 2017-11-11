@@ -7,7 +7,7 @@
 <html >
 <head>
 	<meta charset="UTF-8">
-	<title>Exams - Student</title>
+	<title>Exams - Professor</title>
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/main.css" />
 	<link rel = "stylesheet" type = "text/css" href = "../../static/css/question_bank.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
@@ -99,9 +99,19 @@
 					</form>
 				</div>
 			</div>
-			<br>-->
+			<br>
+			-->
 		</div>
-		
+		<div id="questions">
+			<div id="create-question">
+				<form>
+					<div style="text-align: center;">
+						<input class="clean" type="button" value="Cancel" style="background: white; color: black;" onClick="goTo('review_exams.html')">
+						<input class="clean" type="button" value="Update" onClick="updateExam()">
+					</div>
+				</form>
+			</div>
+		</div>
 		
 	</div>
 	<div id="footer">

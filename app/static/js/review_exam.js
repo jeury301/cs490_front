@@ -44,7 +44,7 @@ function listExamsToTake(response){
 	var exam_node = document.getElementById("question_list")
 	
 	for(var i=0; i<questions.length;i++){
-		var height = 430;
+		var height = 650;
 		var question = questions[i]
 		var new_div = document.createElement("div")
 		new_div.id = "questions"
@@ -56,7 +56,53 @@ function listExamsToTake(response){
 		}
 		comments += "</ul>"
 		height += notes.length * 50
-		new_div.innerHTML = '<div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label>Grade: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+question['grade']+" / "+question['point_value']+'</label></div></div><div class="question-block"><div class="left-block"><label>Comments: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;">'+comments+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea rows="15" style="width: 100%; font-size: 16px;" readonly>'+question['answer_text']+'</textarea></div></div><br><div style="height: '+height+'px"></div></form></div>'
+		new_div.innerHTML = `<div id="create-question">
+								<form>
+									<div class="question-block">
+										<div class="left-block">
+											<label>Question: </label>
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;">
+											<label style="color:#5bc0de;">`+question['question_text']+`</label>
+										</div>
+									</div>
+									<div class="question-block">
+										<div class="left-block">
+											<label>Grade: </label>
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;">
+											<label style="color:#5bc0de;">`+question['grade']+" / "+question['point_value']+`</label>
+										</div>
+									</div>
+									<div class="question-block">
+										<div class="left-block">
+											<label>System Comments: </label>
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;">
+											<label style="color:#5bc0de;">`+comments+`</label>
+										</div>
+									</div>
+									<div class="question-block">
+										<div class="left-block"><label>Professor Comments: </label>
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;">
+											<textarea rows="10" style="width: 100%; font-size: 16px;" readonly>`+question['professor_notes']+`</textarea>
+										</div>
+									</div>
+									<div class="question-block">
+										<div class="left-block">
+											<label>Answer: </label>
+										</div>
+									<div class="right-block other">
+										<textarea rows="15" style="width: 100%; font-size: 16px;" readonly>`+question['answer_text']+`
+										</textarea>
+									</div>
+								</div>
+								<br>
+								<div style="height: `+height+`px">
+								</div>
+							</form>
+						</div>`
 		exam_node.appendChild(new_div)
 
 		var new_br = document.createElement("br")

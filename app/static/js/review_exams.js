@@ -7,6 +7,13 @@ window.onload=function(){
 
 	document.getElementById('exam_name').innerHTML = "Exam Name: "+test_name
 
+	var exam_just_reviewed = window.localStorage.getItem("exam_just_reviewed")
+
+	if(exam_just_reviewed=="yes"){
+		flash("Exam successfully updated!", "#01BC9F")
+		window.localStorage.removeItem("exam_just_reviewed")
+	
+	}
 
 	var fields = {
 		"test_id":exam_to_review
@@ -17,6 +24,7 @@ window.onload=function(){
 
 }; 
 
+var test_scores = {}
 
 function testScoresList(response){
 	var items = response['items']
@@ -27,7 +35,7 @@ function testScoresList(response){
 	for (item in items){
 		//console.log("ITEM: "+JSON.stringify(items[item]))
 		var tr = document.createElement("tr");
-		
+		test_scores[items[item]['student_id']] = items[item]['primary_key']
 		var student_id_td = document.createElement("td");
 		var student_id = document.createTextNode(items[item]['student_id']);
 		student_id_td.appendChild(student_id);
@@ -77,8 +85,13 @@ function reviewExam(student_id){
 
 	var grade = document.getElementById('student_grade_'+student_id).textContent
 
+	var test_score = test_scores[student_id]
+
 	window.localStorage.setItem("student_id_under_review", student_id)
 	window.localStorage.setItem("student_grade", grade)
+	window.localStorage.setItem("test_score", test_score)
+
+	console.log("Test score: "+test_score)
 
 	console.log(student_id)
 	goTo('professor_review_exam.html')
