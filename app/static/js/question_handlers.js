@@ -8,7 +8,7 @@ window.onload=function(){
 	}
 
 	var fields = {}
-	//ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
+	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
 }; 
 
 
@@ -22,6 +22,111 @@ function fullyDeleteQuesiton(){
 
 }
 
+
+/*
+The following function makes an ajax call to the questions resources to grab the list of questions
+*/
+function ajaxCallQuestion(action, fields, primary_key, order, order_by){
+	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	var data = 'json_string={"action":"'+action+'"'
+	if(fields != '')
+		data = data+',"fields":'+fields
+	if(primary_key != '')
+		data = data+',"primary_key":"'+primary_key+'"'
+	if(order!='')
+		data = data+',"order":"'+order+'"'
+	if(order_by!='')
+		data = data+',"order_by":"'+order_by+'"'
+	data = data + '}'
+
+	console.log(data)
+	//creating an ajax request object.
+	
+	var request = new XMLHttpRequest();
+	//opening request of type 'POST' to endpoint 'login.php' (back of the front)
+	request.open('POST', '../../controllers/question/question_front.php', true);
+	//setting up the content type in the header to 'x-wwww-form-urlencoded'
+	request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+	//making ajax request.
+	request.send(data);
+
+	//ajax request was successful
+	request.onload = function() {
+		if (request.status >= 200 && request.status < 400) {
+			var resp = JSON.parse(request.responseText);
+			//console.log(resp['status'])
+			if(resp['status']=="success")
+				questionList(resp)
+			else
+				console.log("Internal error: "+resp['internal_message'])
+			//console.log(JSON.stringify(response))
+			//console.log(resp)
+		} else {
+			var resp = request.responseText;
+			console.log("Something major happened!")
+			console.log(JSON.stringify(resp))
+
+		}
+	};
+
+	//ajax request failed
+	request.onerror = function() {
+		console.log("Something went wrong")
+	};
+	
+}
+
+
+
+function questionList(response){
+	var items = response['items']
+
+	console.log(items.length)
+	var table = document.getElementById("question_table");
+
+	for (item in items){
+		//console.log("ITEM: "+JSON.stringify(items[item]))
+		var tr = document.createElement("tr");
+		//var question_id_td = document.createElement("td");
+		//var question_id = document.createTextNode(items[item]['primary_key']);
+		//question_id_td.appendChild(question_id);
+
+		var difficulty_td = document.createElement("td");
+		var difficulty = document.createTextNode(items[item]['difficulty']);
+		difficulty_td.appendChild(difficulty);
+
+		var topic_td = document.createElement("td");
+		var topic = document.createTextNode(items[item]['topic']);
+		topic_td.appendChild(topic);
+
+		var question_name_td = document.createElement("td");
+		question_name_td.id = "question_text_"+items[item]['primary_key']
+		var question_name = document.createTextNode(items[item]['question_text']);
+		
+		question_name_td.appendChild(question_name);
+
+		tr.appendChild(difficulty_td);
+		tr.appendChild(topic_td);
+
+		tr.appendChild(question_name_td);
+		//tr.appendChild(edit_td);
+
+		table.appendChild(tr);
+		
+	}
+	if(scrollBars()){
+		document.getElementById("footer").style.position = "relative";
+		document.getElementById("dropdown").style.position = "relative";
+	}
+	else{
+		document.getElementById("footer").style.position = "fixed";
+		document.getElementById("dropdown").style.position = "fixed";
+		console.log("fixed")
+	}
+
+	
+	
+}
 
 
 
@@ -334,6 +439,67 @@ function ajaxCallInsertTestCase(action, fields){
 }
 
 
+
+
+function clearTable(table) {
+  var rows = table.rows;
+  var i = rows.length;
+  while (--i) {
+    rows[i].parentNode.removeChild(rows[i]);
+    // or
+    // table.deleteRow(i);
+  }
+}
+
+
+
+function filterQuestions(){
+	console.log("Filtering questions")
+	var fields = {}
+	var sorted_by_obj = document.getElementById("sorted_by")
+	var sorted_by =  sorted_by_obj.options[sorted_by_obj.selectedIndex].value;
+
+	var order_obj = document.getElementById("order")
+	var order =  order_obj.options[order_obj.selectedIndex].value;
+
+	
+
+	if(sorted_by == "")
+		order = ""
+
+	var topic_obj = document.getElementById("topic_question")
+	var topic =  topic_obj.options[topic_obj.selectedIndex].value;
+
+	if(topic != "")
+		fields["topic"] = topic
+
+	var difficulty_obj = document.getElementById("difficulty_question")
+	var difficulty =  difficulty_obj.options[difficulty_obj.selectedIndex].value;
+
+	if(difficulty != "")
+		fields["difficulty"] = difficulty
+
+	console.log("Order: "+order);
+	console.log("Sorted by: "+sorted_by);
+	console.log("Filters: "+JSON.stringify(fields))
+
+	var table = document.getElementById("question_table");
+	clearTable(table)
+
+	ajaxCallQuestion("list", JSON.stringify(fields), "", order, sorted_by);
+}
+
+
+function resetFilter(){
+	var table = document.getElementById("question_table");
+	clearTable(table)
+   ajaxCallQuestion("list", JSON.stringify({}), "", "", "");
+
+}
+
+
+
+
 /*
 The following function is called by loginAjaxHandler(). It creates, formats and displays a flash message on the login page. It recieves the message, 
 and the background color of the message (red, green).
@@ -408,8 +574,8 @@ else{
 
 function scrollBars(){
 	var body= document.getElementsByTagName("BODY")[0];
-	console.log(body.scrollHeight)
-	console.log(body.clientHeight)
+	//console.log(body.scrollHeight)
+	//console.log(body.clientHeight)
 	return body.scrollHeight>body.clientHeight;	
 }
 
