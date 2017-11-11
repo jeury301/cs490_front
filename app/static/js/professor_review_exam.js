@@ -49,7 +49,7 @@ function listExamsToTake(response){
 	var exam_node = document.getElementById("question_list")
 	
 	for(var i=0; i<questions.length;i++){
-		var height = 700;
+		var height = 750;
 		var question = questions[i]
 		global_questions.push(question)
 		var new_div = document.createElement("div")

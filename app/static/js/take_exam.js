@@ -18,14 +18,17 @@ window.onload=function(){
 }; 
 
 
+var point_values = {}
 
 function listQuestionsExam(response){
 	var questionIds = response['items']
 
 	for(var i=0; i<questionIds.length; i++){
 		//console.log(questionIds[i].question_id)
+		point_values[questionIds[i].question_id] = questionIds[i].point_value
 		ajaxCallExamQuestionsFinal("list", JSON.stringify({"primary_key":questionIds[i].question_id}), "", "", "")
 	}
+
 }
 
 
@@ -37,7 +40,45 @@ function createQuestionNode(response){
 	var exam_node = document.getElementById("question_list")
 	var new_div = document.createElement("div")
 	new_div.id = "question_wrapper_"+question['primary_key']
-	new_div.innerHTML = '<div id="questions"> <div id="create-question"> <form> <div class="question-block"> <div class="left-block"> <label>Question: </label> </div><div class="right-block other" style="margin-bottom: 25px;"> <label style="color:#5bc0de;" id="question_name_'+question['primary_key']+'">'+question['question_text']+'</label> </div></div><div class="question-block"> <div class="left-block"> <label>Answer: </label> </div><div class="right-block other"> <textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;" required></textarea> </div></div><br><div style="height: 430px"></div></form> </div></div><br>'
+	new_div.innerHTML = `<div id="questions"> 
+							<div id="create-question"> 
+								<form> 
+									<div class="question-block"> 
+										<div class="left-block"> 
+											<label>Question: 
+											</label> 
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;"> 
+											<label style="color:#5bc0de;" id="question_name_`+question['primary_key']+`">`+question['question_text']+`
+											</label> 
+										</div>
+									</div>
+									<div class="question-block">
+										<div class="left-block">
+											<label>Question Value: </label>
+										</div>
+										<div class="right-block other" style="margin-bottom: 25px;">
+											<div class="right-block">
+													<label style="color:#5bc0de;">`+point_values[question['primary_key']]+`</label>
+											</div>
+											
+										</div>
+									</div>
+									<div class="question-block"> 
+										<div class="left-block"> 
+											<label>Answer: </label> 
+										</div>
+										<div class="right-block other"> 
+											<textarea id="student_answer_`+question['primary_key']+`" rows="15" style="width: 100%; font-size: 16px;" required></textarea> 
+										</div>
+									</div>
+									<br>
+									<div style="height: 430px">
+									</div>
+								</form> 
+							</div>
+						</div>
+						<br>`
 
 	//new_div.innerHTML = '<div id="questions"><div id="create-question"><form><div class="question-block"><div class="left-block"><label>Question: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="question_name_'+question['primary_key']+'">'+question['question_text']+'</label></div></div><div class="question-block"><div class="left-block"><label >Function Name: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="func_name_"'+question['primary_key']+'>'+question['func_name']+'</label></div></div><div class="question-block"><div class="left-block"><label>Function Params: </label></div><div class="right-block other" style="margin-bottom: 25px;"><label style="color:#5bc0de;" id="param_names_"'+question['primary_key']+'>'+question['param_names']+'</label></div></div><div class="question-block"><div class="left-block"><label>Answer: </label></div><div class="right-block other"><textarea id="student_answer_'+question['primary_key']+'" rows="15" style="width: 100%; font-size: 16px;" required></textarea></div></div><br><div style="height: 430px"></div></form></div></div><br>'
 	exam_node.appendChild(new_div)
