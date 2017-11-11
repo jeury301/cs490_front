@@ -8,7 +8,7 @@ window.onload=function(){
 	}
 
 	var fields = {}
-	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
+	//ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
 }; 
 
 
