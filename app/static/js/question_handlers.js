@@ -28,6 +28,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function ajaxCallQuestion(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -204,7 +205,7 @@ function submitQuestion(event){
 	console.log("difficulty: "+difficulty)
 
 	var fields = {"question_text":question_text, "func_name":func_name, "param_names":param_names, "topic":topic, "difficulty":difficulty}
-
+	console.log("STUFF: "+JSON.stringify(fields))
 	ajaxCallInsertQuestion("insert", JSON.stringify(fields))
 }
 
@@ -247,7 +248,8 @@ The following function makes an ajax call to the questions resources to insert a
 */
 function ajaxCallInsertQuestion(action, fields){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
-	fields = fields.replaceAll("+", "%2B")
+	
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -378,7 +380,7 @@ The following function makes an ajax call to the test case resources resources t
 */
 function ajaxCallInsertTestCase(action, fields){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
-	fields = fields.replaceAll("+", "%2B")
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -681,9 +683,5 @@ function msieversion()
 
 }
 
-String.prototype.replaceAll = function(str1, str2, ignore) 
-{
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-} 
 
 loadGeneral();

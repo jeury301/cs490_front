@@ -1,5 +1,7 @@
 //Helper functions!!!
 
+var to_escape = ["+", "&"]
+
 window.addEventListener('resize', function(){
     if(scrollBars()){
         document.getElementById("footer").style.position = "relative";
@@ -202,3 +204,20 @@ function enableScroll() {
     window.ontouchmove = null;  
     document.onkeydown = null;  
 }
+
+
+function escapeThemAll(escapeMe){
+    console.log("BEFORE: "+escapeMe)
+    for(var i=0;i<to_escape.length;i++){
+        escapeMe = escapeMe.replaceAll(to_escape[i], encodeURIComponent(to_escape[i]))
+    }
+    console.log("AFTER: "+escapeMe)
+    return escapeMe
+}
+
+
+String.prototype.replaceAll = function(str1, str2, ignore) 
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+} 
+

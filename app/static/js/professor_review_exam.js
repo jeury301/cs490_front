@@ -167,7 +167,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function updateQuestionAnswer(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
-	fields = fields.replaceAll("+", "%2B")
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -244,6 +244,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function ajaxUpdateTestScore(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
@@ -303,6 +304,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function ajaxCallGetQuestionAnswers(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields

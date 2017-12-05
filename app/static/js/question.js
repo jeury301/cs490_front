@@ -12,7 +12,7 @@ window.onload=function(){
 	loadGeneral();
 	var fields = {}
 	ajaxCallQuestion("list", JSON.stringify(fields), "", "", "");
-	
+	console.log("Do you see me?")
 	
 }; 
 
@@ -209,6 +209,7 @@ The following function makes an ajax call to the questions resources to grab the
 */
 function ajaxCallQuestion(action, fields, primary_key, order, order_by){
 	//building string to send through an ajax call to the back of the front (question_middle.php) in the format required for 'x-www-form-urlencoded'
+	fields = escapeThemAll(fields)
 	var data = 'json_string={"action":"'+action+'"'
 	if(fields != '')
 		data = data+',"fields":'+fields
