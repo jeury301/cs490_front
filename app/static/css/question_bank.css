@@ -12,7 +12,7 @@
 
 
 table, th, td {
-	border: 1px solid black;
+	border: 3px solid #292E33;
 	border-collapse: collapse;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 16px;
@@ -119,7 +119,7 @@ after { clear: both; }
 
 
 #create-question form input[type="submit"] {
-  background: #5cb85c;
+  background: #01BC9F;
   border: 0;
   width: 20%;
   height: 40px;
@@ -168,7 +168,7 @@ textarea {
 
 
 .submit-button {
- background-color:  #5cb85c !important;
+ background-color:  #01BC9F !important;
  border-radius: 3px;
  color: white;
  width: 10% !important;
@@ -178,7 +178,7 @@ textarea {
 }
 
 .max-submit-button{
-  background-color:  #5cb85c !important;
+  background-color:  #01BC9F !important;
  border-radius: 3px;
  color: white;
  margin-bottom: 1em;
@@ -188,7 +188,7 @@ textarea {
 }
 
 .sub-submit-button {
-  background-color:  #5cb85c !important;
+  background-color:  #01BC9F !important;
  border-radius: 3px;
  color: white;
  margin-bottom: 1em;

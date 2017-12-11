@@ -1,0 +1,9 @@
+table, th, td {
+	border: 3px solid #3B4148;
+	border-collapse: collapse;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 16px;
+	line-height: 1.5em;
+	padding: 5px;
+
+}

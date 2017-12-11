@@ -9,14 +9,14 @@ window.onload=function(){
 	var fields = {"test_id":exam_to_review.test_id, "student_id":student_key}
 	
 	var score = Number(exam_to_review.test_score)
-	var color = "#d9534f"
+	var color = "#F45F63"
 
 	if(score <  70)
-		color = "#d9534f"
+		color = "#F45F63"
 	if(score >= 70 && score < 90)
 		color = "#428bca"
 	if(score >= 90)
-		color = "#5cb85c"
+		color = "#01BC9F"
 
 	document.getElementById('your_final_score').innerHTML = 'Your final score: <strong style="color:'+color+'">&nbsp;'+score+'%</strong>'
 
@@ -49,12 +49,80 @@ function listExamsToTake(response){
 		var new_div = document.createElement("div")
 		new_div.id = "questions"
 		var notes = JSON.parse(question['notes'])['comments']
+		
+		var parametersMatch = JSON.parse(question['notes'])['doParametersMatch']
+		var functionNameMatches = JSON.parse(question['notes'])['doesFunctionNameMatch']
+
+		var parameterMessage = "Function parameter name(s) do not match requirements. 1 point deducted."
+		var functionNameMessage = "Function name does not match requirements. 1 point deducted."
+
+		if(String(parametersMatch)=="true")
+			parameterMessage = "Function parameter name(s) match requirements."
+
+		if(String(functionNameMatches)=="true")
+			functionNameMessage = "Function name matches requirements."
+
+		var functionNameParameters = [
+			{
+				"message":parameterMessage,
+				"match":String(parametersMatch)
+			},
+			{
+				"message":functionNameMessage,
+				"match":String(functionNameMatches)
+			}
+		]
+
+		var question_cases = JSON.parse(question['notes'])['testCaseResults']
+		console.log(question_cases)
+		var testCaseTable = `<table style="width:100%;">
+					<col width="50%">
+					<col width="30%">
+					<col width="15%">
+					<col width="5%">
+					<tr>
+						<th>Expected</th>
+						<th>Run</th>
+						<th>Points Earned</th>
+						<th>Check</th>
+					</tr>`
+
+		
+		for(var row=0; row < question_cases.length; row++){
+			var actualRow = '<tr><td>'+question_cases[row]['expected']+'</td>'
+			actualRow+='<td>'+question_cases[row]['actual']+'</td>'
+			actualRow+='<td class="text-center">'+question_cases[row]['pointsEarned']+'</td>'
+			var color="#F45F63"
+			var error="&#xd7;"
+			if(String(question_cases[row]['didItPass'])==1){
+				color="#01BC9F"
+				error="&#x2713;"
+			}
+			actualRow+='<td class="text-center" bgcolor='+color+'>'+error+'</td>'
+			testCaseTable+=actualRow
+		}
+
+		for(var row=0; row < functionNameParameters.length; row++){
+			var actualRow = '<tr ><td colspan="3">'+functionNameParameters[row]['message']+'</td>'
+			var color="#F45F63"
+			var error="&#xd7;"
+			if(String(functionNameParameters[row]['match'])=="true"){
+				color="#01BC9F"
+				error="&#x2713;"
+			}
+			actualRow+='<td class="text-center" bgcolor='+color+'>'+error+'</td>'
+			testCaseTable+=actualRow
+		}
+
+		testCaseTable+="</table>"
+		/*
 		var comments = '<ul style="text-align:left!important;">'
+		
 		for(var j=0; j<notes.length;j++){
 			comments += '<p style="width:100%"><li style="text-align:left!important;">'+notes[j]+'</li></p>'
 			
-		}
-		comments += "</ul>"
+		}*/
+		//comments += "</ul>"
 		height += notes.length * 50
 		new_div.innerHTML = `<div id="create-question">
 								<form>
@@ -79,7 +147,7 @@ function listExamsToTake(response){
 											<label>System Comments: </label>
 										</div>
 										<div class="right-block other" style="margin-bottom: 25px;">
-											<label style="color:#5bc0de;">`+comments+`</label>
+											`+testCaseTable+`
 										</div>
 									</div>
 									<div class="question-block">
