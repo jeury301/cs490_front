@@ -43,11 +43,14 @@ function listExamsToTake(response){
 	var questions = response['items']
 	console.log(questions)
 
+	questions_length = questions.length
+
 	var exam_node = document.getElementById("question_list")
 	
 	for(var i=0; i<questions.length;i++){
 		var height = 650;
 		var question = questions[i]
+		global_questions.push(question)
 		var new_div = document.createElement("div")
 		new_div.id = "questions"
 		var notes = JSON.parse(question['notes'])['comments']
