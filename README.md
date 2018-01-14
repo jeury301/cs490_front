@@ -1,4 +1,4 @@
-# CS 490 - Exam Management System (Fron-end)
+# Exam Management System (Front-end)
 
 A three tiers system that serves as a course management tool, where students and professors interact in the manner of exam-taking and exam-managment, respectively. The system has an autograding mechanism for the python programming language. 
 
